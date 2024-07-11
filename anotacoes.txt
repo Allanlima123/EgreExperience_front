@@ -1,0 +1,91 @@
+
+//       <section class="flex space-x-3 px-6 box_height">
+//         <div class="bg-gray-800 w-1/4 p-4 rounded-md">
+//           <div class="w-full flex items-center justify-center mb-3">
+//             <div>
+//               <img
+//                 src="../../assets/images/avatar-3.jpg"
+//                 alt="user IMG"
+//                 class="w-full h-full rounded-full"
+//               />
+//             </div>
+//           </div>
+//           <div>
+//             <p class="text-white font-light text-md"><strong>{{ dataUser.name }}</strong></p>
+//             <p class="text-white font-light text-md"><strong>{{ dataUser.email }}</strong></p>
+//             <p class="text-white font-light text-md"><strong>{{ dataUser.occupation }}</strong></p>
+//           </div>
+//         </div>
+//         <div class="bg-gray-800 rounded-md w-3/4 p-4 overflow-y-scroll">
+//           <h3 class="text-white font-semibold mb-2">Experiência Profissional</h3>
+//           <ul class="text-white">
+//             <li v-for="experience in dataUser.experiences" :key="experience.position">
+//               <strong>{{ experience.position }}</strong>, {{ experience.company }} ({{ experience.period }})
+//             </li>
+//           </ul>
+
+//           <h3 class="text-white font-semibold mb-2 mt-4">Formação Acadêmica</h3>
+//           <ul class="text-white">
+//             <li><strong>{{ dataUser.education.degree }}</strong> em {{ dataUser.education.field }} - {{ dataUser.education.institution }}, {{ dataUser.education.graduationYear }}</li>
+//           </ul>
+
+//           <h3 class="text-white font-semibold mb-2 mt-4">Habilidades</h3>
+//           <ul class="text-white">
+//             <li v-for="skill in dataUser.skills" :key="skill">{{ skill }}</li>
+//           </ul>
+
+//           <h3 class="text-white font-semibold mb-2 mt-4">Certificações</h3>
+//           <ul class="text-white">
+//             <li v-for="certification in dataUser.certifications" :key="certification.name">
+//               <strong>{{ certification.name }}</strong> - {{ certification.authority }}
+//             </li>
+//           </ul>
+
+//           <h3 class="text-white font-semibold mb-2 mt-4">Projetos Relevantes</h3>
+//           <ul class="text-white">
+//             <li v-for="project in dataUser.projects" :key="project.name">
+//               <strong>{{ project.name }}</strong> - {{ project.description }}
+//             </li>
+//           </ul>
+
+//           <h3 class="text-white font-semibold mb-2 mt-4">Interesses Profissionais</h3>
+//           <p class="text-white">{{ dataUser.professionalInterests }}</p>
+//         </div>
+//       </section>
+//     </main>
+//     <Footer />
+//   </div>
+// </template>
+
+// <script setup>
+// import NavBar from "../perfil/Navbar.vue";
+// import Footer from "../perfil/Footer.vue";
+
+// const dataUser = {
+//   experiences: [
+//     { position: 'Desenvolvedor Full Stack', company: 'Empresa X', period: '2019-2023' },
+//     { position: 'Estagiário de Desenvolvimento', company: 'Empresa Y', period: '2018-2019' }
+//   ],
+//   education: {
+//     degree: 'Bacharelado',
+//     field: 'Engenharia de Software',
+//     institution: 'Universidade ABC',
+//     graduationYear: '2018'
+//   },
+//   skills: ['JavaScript', 'Vue.js', 'Node.js', 'SQL'],
+//   certifications: [
+//     { name: 'Certificação em Desenvolvimento Web', authority: 'Certificadora ABC' }
+//   ],
+//   projects: [
+//     { name: 'Sistema de Gestão Escolar', description: 'Desenvolvimento de um sistema web para gestão escolar' }
+//   ],
+//   professionalInterests: 'Desenvolvimento de software, tecnologias emergentes, UX/UI'
+// };
+// </script>
+
+// <style scoped>
+// .box_height {
+//   min-height: 24rem;
+// }
+// </style>
+// 
