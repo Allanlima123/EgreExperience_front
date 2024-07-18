@@ -3,7 +3,7 @@
     <transition name="slide">
       <nav
         :class="{ 'w-16': isCollapsed, 'w-56': !isCollapsed }"
-        class="bg-gray-800 absolute h-full rounded-r-md transition-width duration-800"
+        class="bg-gray-800 h-screen rounded-r-md transition-width duration-800"
       >
         <div class="h-full relative">
           <div
@@ -26,62 +26,64 @@
                 class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
               >
                 <i class="fa fa-university text-white text-xl"></i>
-                <Transition name="text">
+                <transition name="text">
                   <span
                     v-if="!isCollapsed"
                     class="ml-2 text-white transition-width"
                     >Home</span
                   >
-                </Transition>
+                </transition>
               </div>
               <div
                 class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
               >
                 <i class="fa fa-graduation-cap text-white text-xl"></i>
-                <Transition name="text">
+                <transition name="text">
                   <span
                     v-if="!isCollapsed"
                     class="ml-2 text-white transition-opacity duration-500 ease-linear"
                     >Formação</span
                   >
-                </Transition>
+                </transition>
               </div>
-              <div
-                class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
-              >
-                <i class="fa fa-users text-white text-xl"></i>
-                <Transition name="text">
-                  <span
-                    v-if="!isCollapsed"
-                    class="ml-2 text-white transition-opacity duration-500 ease-linear"
-                    >Equipe</span
-                  >
-                </Transition>
-              </div>
+
               <div
                 class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
               >
                 <i class="fa fa-trophy text-white text-xl"></i>
-                <Transition name="text">
+                <transition name="text">
                   <span
                     v-if="!isCollapsed"
                     class="ml-2 text-white transition-opacity duration-500 ease-linear"
                     >Experiência</span
                   >
-                </Transition>
+                </transition>
+              </div>
+
+              <div
+                class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
+              >
+                <i class="fa fa-users text-white text-xl"></i>
+                <transition name="text">
+                  <span
+                    v-if="!isCollapsed"
+                    class="ml-2 text-white transition-opacity duration-500 ease-linear"
+                    >Egressos</span
+                  >
+                </transition>
               </div>
 
               <div
                 class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
               >
                 <i class="fa fa-cubes text-white text-xl"></i>
-                <Transition name="text">
+                <transition name="text">
                   <span
                     v-if="!isCollapsed"
                     class="ml-2 text-white transition-opacity duration-500 ease-linear"
                     >Projetos</span
                   >
-                </Transition>
+                </transition>
               </div>
             </div>
             <div>
@@ -89,25 +91,26 @@
                 class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
               >
                 <i class="fa fa-cog text-white text-xl"></i>
-                <Transition name="text">
+                <transition name="text">
                   <span
                     v-if="!isCollapsed"
                     class="ml-2 text-white transition-opacity duration-500 ease-linear"
                     >Configurações</span
                   >
-                </Transition>
+                </transition>
               </div>
+              
               <div
                 class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
               >
                 <i class="fas fa-door-open text-white text-xl"></i>
-                <Transition name="text">
+                <transition name="text">
                   <span
                     v-if="!isCollapsed"
                     class="ml-2 text-white transition-opacity duration-500 ease-linear"
                     >Sair</span
                   >
-                </Transition>
+                </transition>
               </div>
             </div>
           </div>
@@ -118,7 +121,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue';
 
 const isCollapsed = ref(false);
 
@@ -140,12 +143,10 @@ const toggleSidebar = () => {
   opacity: 0;
   transform: translateX(-10px);
 }
-
 .text-enter-active,
 .text-leave-active {
   transition: opacity 0.5s ease;
 }
-
 .text-enter-from,
 .text-leave-to {
   opacity: 0;
