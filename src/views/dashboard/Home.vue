@@ -6,7 +6,7 @@
       <header
         class="bg-gray-800 text-white p-6 flex justify-between items-center rounded-tl-md rounded-bl-md"
       >
-        <!-- <div>alan</div> -->
+
         <div>
           <h1 class="text-xl font-bold">Bem-vindos ao Portal de Egressos</h1>
           <p class="text-md mt-2">
@@ -60,11 +60,11 @@
             profissional.
           </p>
         </section>
-      </main>
 
-      <footer class="bg-gray-800 text-white p-6 rounded-bl-md rounded-tl-md">
-        <p>&copy; 2024 Sua Instituição. Todos os direitos reservados.</p>
-      </footer>
+        <footer class="bg-gray-800 text-white p-6 rounded-bl-md rounded-tl-md">
+          <p>&copy; 2024 Sua Instituição. Todos os direitos reservados.</p>
+        </footer>
+      </main>
     </div>
   </div>
 </template>

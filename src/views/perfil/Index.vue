@@ -1,169 +1,178 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-gray-300">
+  <div class="min-h-screen h-screen flex flex-col bg-gray-300">
     <NavBar />
-    <main class="flex-grow p-4">
-      <section class="flex items-center justify-between px-6 space-x-3 pb-4">
-        <h1 class="text-gray-800 font-bold mb-4 text-4xl">Perfil</h1>
-        <div class="space-x-3">
-          <button
-            class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
-          >
-            Back to Home
-          </button>
-          <button
-            class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
-          >
-            Edit Profile
-          </button>
+    <main class="flex-grow p-4 overflow-auto flex justify-center">
+      <section class="flex h-full flex-col max-w-screen-xl w-full">
+        <div class="flex items-center justify-between px-4 space-x-3 pb-4">
+          <h1 class="text-gray-800 font-bold mb-4 text-4xl">Perfil</h1>
+          <div class="space-x-3">
+            <button
+              class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
+            >
+              Back to Home
+            </button>
+            <button
+              class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
+            >
+              Edit Profile
+            </button>
+          </div>
         </div>
-      </section>
 
-      <section class="flex space-x-3 px-6">
-        <div class="w-1/4 p-4 rounded-md">
-          <div class="w-full flex items-center justify-center mb-3">
+        <div class="flex overflow-hidden">
+          <div class="w-1/4 p-4 rounded-md">
+            <div class="w-full flex items-center justify-center mb-3">
+              <div>
+                <img
+                  src="../../assets/images/avatar-3.jpg"
+                  alt="user IMG"
+                  class="w-full h-full rounded-full"
+                />
+              </div>
+            </div>
             <div>
-              <img
-                src="../../assets/images/avatar-3.jpg"
-                alt="user IMG"
-                class="w-full h-full rounded-full"
-              />
+              <p class="text-gray-800 font-light text-md">
+                <strong>{{ dataUser.name }}</strong>
+              </p>
+              <p class="text-gray-800 font-light text-md">
+                <strong>{{ dataUser.email }}</strong>
+              </p>
+              <p class="text-gray-800 font-light text-md">
+                <strong>{{ dataUser.occupation }}</strong>
+              </p>
             </div>
           </div>
-          <div>
-            <p class="text-gray-800 font-light text-md">
-              <strong>{{ dataUser.name }}</strong>
-            </p>
-            <p class="text-gray-800 font-light text-md">
-              <strong>{{ dataUser.email }}</strong>
-            </p>
-            <p class="text-gray-800 font-light text-md">
-              <strong>{{ dataUser.occupation }}</strong>
-            </p>
-          </div>
-        </div>
 
-        <div class="rounded-md w-3/4 scroll_box overflow-y-scroll p-3 h-96">
-          <div>
-            <h3 class="text-gray-800 text-2xl font-semibold">
-              Formação Acadêmica
-            </h3>
-            <ul class="text-gray-800 font-normal font-sans text-sm my-2">
-              <li>
-                <strong>{{ dataUser.education.degree }}</strong> em
-                {{ dataUser.education.field }} -
-                {{ dataUser.education.institution }},
-                {{ dataUser.education.graduationYear }}
-              </li>
-            </ul>
-            <span
-              class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
-              >Ver Formações Acadêmicas!</span
-            >
-          </div>
-
-          <div class="section-divider"></div>
-          <!-- Linha de divisão -->
-
-          <div>
-            <h3 class="text-gray-800 text-2xl font-semibold">
-              Experiência Profissional
-            </h3>
-            <ul class="text-gray-800 font-normal font-sans text-sm my-2">
-              <li
-                v-for="experience in dataUser.experiences"
-                :key="experience.position"
+          <!-- Parte rolável do conteúdo -->
+          <div class="rounded-md w-3/4 scroll_box overflow-y-scroll">
+            <div>
+              <h3 class="text-gray-800 text-2xl font-semibold">
+                Formação Acadêmica
+              </h3>
+              <ul class="text-gray-800 font-normal font-sans text-sm my-2">
+                <li>
+                  <strong>{{ dataUser.education.degree }}</strong> em
+                  {{ dataUser.education.field }} -
+                  {{ dataUser.education.institution }},
+                  {{ dataUser.education.graduationYear }}
+                </li>
+              </ul>
+              <span
+                class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
+                >Ver Formações Acadêmicas!</span
               >
-                <strong>{{ experience.position }}</strong
-                >, {{ experience.company }} ({{ experience.period }})
-              </li>
-            </ul>
-            <span
-              class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
-              >Ver Experiência Completa!</span
-            >
-          </div>
+            </div>
 
-          <div class="section-divider"></div>
-          <!-- Linha de divisão -->
+            <div class="section-divider"></div>
+            <!-- Linha de divisão -->
 
-          <div>
-            <h3 class="text-gray-800 text-2xl font-semibold">Certificações</h3>
-            <ul class="text-gray-800 font-normal font-sans text-sm my-2">
-              <li
-                v-for="certification in dataUser.certifications"
-                :key="certification.name"
+            <div>
+              <h3 class="text-gray-800 text-2xl font-semibold">
+                Experiência Profissional
+              </h3>
+              <ul class="text-gray-800 font-normal font-sans text-sm my-2">
+                <li
+                  v-for="experience in dataUser.experiences"
+                  :key="experience.position"
+                >
+                  <strong>{{ experience.position }}</strong
+                  >, {{ experience.company }} ({{ experience.period }})
+                </li>
+              </ul>
+              <span
+                class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
+                >Ver Experiência Completa!</span
               >
-                <strong>{{ certification.name }}</strong> -
-                {{ certification.authority }}
-              </li>
-            </ul>
-            <span
-              class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
-              >Ver todos os Certificados!</span
-            >
-          </div>
+            </div>
 
-          <div class="section-divider"></div>
-          <!-- Linha de divisão -->
+            <div class="section-divider"></div>
+            <!-- Linha de divisão -->
 
-          <div>
-            <h3 class="text-gray-800 text-2xl font-semibold">
-              Projetos Relevantes
-            </h3>
-            <ul class="text-gray-800 my-2">
-              <li v-for="project in dataUser.projects" :key="project.name">
-                <strong>{{ project.name }}</strong> -
-                {{ project.description }}
-              </li>
-            </ul>
-            <span
-              class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
-              >Ver todos os Projetos!</span
-            >
-          </div>
-
-          <div class="section-divider"></div>
-          <!-- Linha de divisão -->
-
-          <div>
-            <h3 class="text-gray-800 text-2xl font-semibold">Habilidades</h3>
-            <ul class="text-gray-800 my-2 flex flex-wrap space-x-3">
-              <li v-for="skill in dataUser.skills" :key="skill" class="text-sm">
-                {{ skill }}
-              </li>
-            </ul>
-          </div>
-
-          <div class="section-divider"></div>
-          <!-- Linha de divisão -->
-
-          <div>
-            <h3 class="text-gray-800 text-2xl font-semibold">
-              Descrição Profissional
-            </h3>
-            <p class="text-gray-800 my-2">
-              {{ dataUser.professionalDescription }}
-            </p>
-          </div>
-
-          <div class="section-divider"></div>
-          <!-- Linha de divisão -->
-
-          <div>
-            <h3 class="text-gray-800 text-2xl font-semibold">Idiomas</h3>
-            <ul class="text-gray-800 my-2 flex flex-wrap space-x-3">
-              <li
-                v-for="language in dataUser.languages"
-                :key="language"
-                class="text-sm"
+            <div>
+              <h3 class="text-gray-800 text-2xl font-semibold">
+                Certificações
+              </h3>
+              <ul class="text-gray-800 font-normal font-sans text-sm my-2">
+                <li
+                  v-for="certification in dataUser.certifications"
+                  :key="certification.name"
+                >
+                  <strong>{{ certification.name }}</strong> -
+                  {{ certification.authority }}
+                </li>
+              </ul>
+              <span
+                class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
+                >Ver todos os Certificados!</span
               >
-                {{ language }}
-              </li>
-            </ul>
-          </div>
+            </div>
 
-          <div class="section-divider"></div>
-          <!-- Linha de divisão -->
+            <div class="section-divider"></div>
+            <!-- Linha de divisão -->
+
+            <div>
+              <h3 class="text-gray-800 text-2xl font-semibold">
+                Projetos Relevantes
+              </h3>
+              <ul class="text-gray-800 my-2">
+                <li v-for="project in dataUser.projects" :key="project.name">
+                  <strong>{{ project.name }}</strong> -
+                  {{ project.description }}
+                </li>
+              </ul>
+              <span
+                class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
+                >Ver todos os Projetos!</span
+              >
+            </div>
+
+            <div class="section-divider"></div>
+            <!-- Linha de divisão -->
+
+            <div>
+              <h3 class="text-gray-800 text-2xl font-semibold">Habilidades</h3>
+              <ul class="text-gray-800 my-2 flex flex-wrap space-x-3">
+                <li
+                  v-for="skill in dataUser.skills"
+                  :key="skill"
+                  class="text-sm"
+                >
+                  {{ skill }}
+                </li>
+              </ul>
+            </div>
+
+            <div class="section-divider"></div>
+            <!-- Linha de divisão -->
+
+            <div>
+              <h3 class="text-gray-800 text-2xl font-semibold">
+                Descrição Profissional
+              </h3>
+              <p class="text-gray-800 my-2">
+                {{ dataUser.professionalDescription }}
+              </p>
+            </div>
+
+            <div class="section-divider"></div>
+            <!-- Linha de divisão -->
+
+            <div>
+              <h3 class="text-gray-800 text-2xl font-semibold">Idiomas</h3>
+              <ul class="text-gray-800 my-2 flex flex-wrap space-x-3">
+                <li
+                  v-for="language in dataUser.languages"
+                  :key="language"
+                  class="text-sm"
+                >
+                  {{ language }}
+                </li>
+              </ul>
+            </div>
+
+            <div class="section-divider"></div>
+            <!-- Linha de divisão -->
+          </div>
         </div>
       </section>
     </main>

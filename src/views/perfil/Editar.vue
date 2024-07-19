@@ -1,27 +1,137 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-gray-300">
-    <header class="bg-gray-700 text-white p-4">
-      <h1 class="text-xl">Exemplo de Scroll</h1>
+  <div class="flex flex-col h-screen">
+    <!-- Menu Superior -->
+    <header class="bg-gray-800 text-white p-4">
+      <h1>Menu Superior</h1>
     </header>
-    <main class="flex-grow p-4">
-      <div
-        class="bg-white p-4 rounded-md shadow-md w-1/2 mx-auto overflow-y-scroll h-64"
-      >
-        <p v-for="index in 20" :key="index" class="mb-2">
-          Linha de conteúdo {{ index }}
-        </p>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-grow p-4 overflow-auto">
+      <div class="flex  h-full bg-green-500">
+        <!-- Parte fixa do conteúdo -->
+        <div class=" mb-4 bg-red-500 w-96">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore voluptatum iste facere voluptates laboriosam laborum quas deleniti minima eveniet eum perspiciatis omnis nisi, beatae aperiam consectetur, quibusdam aspernatur neque.
+        </div>
+        <!-- Parte rolável do conteúdo -->
+        <div class="flex-grow overflow-auto">
+          <p>Conteúdo...</p>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <!-- Adicione mais conteúdo aqui para testar o scroll -->
+        </div>
       </div>
     </main>
-    <footer class="bg-gray-700 text-white p-4 text-center">
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-800 text-white p-4">
       <p>Rodapé</p>
     </footer>
   </div>
 </template>
 
+<script>
+export default {
+  name: 'AppLayout',
+};
+</script>
+
 <style scoped>
-/* Não há necessidade de estilos adicionais */
+/* Estilo adicional, se necessário */
 </style>
-
-<script setup></script>
-
-<style lang="scss" scoped></style>
