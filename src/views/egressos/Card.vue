@@ -1,20 +1,25 @@
 <template>
   <div class="bg-gray-300 py-4 items-center justify-center flex flex-col">
-    <div class="flex items-center justify-between px-4 space-x-3 pb-4 w-full max-w-screen-xl">
+    <div
+      class="flex items-center justify-between px-4 space-x-3 pb-4 w-full max-w-screen-xl"
+    >
       <h1 class="text-gray-800 font-bold mb-4 text-4xl">Egressos</h1>
-      <div class="space-x-3">
+      <div class="space-x-3 flex items-center">
+        <div class="relative flex-1">
+          <i
+            class="fa fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+          ></i>
+          <input
+            type="search"
+            class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+            placeholder="Pesquisar..."
+          />
+        </div>
         <router-link to="/">
           <button
-            class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
+            class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
-            Back to Home
-          </button>
-        </router-link>
-        <router-link to="/perfil/editar">
-          <button
-            class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
-          >
-            Edit Profile
+            Voltar para Home
           </button>
         </router-link>
       </div>
@@ -27,7 +32,7 @@
         <div
           v-for="egresso in egressos"
           :key="egresso.id"
-          class="max-w-72 rounded-lg shadow-lg bg-white"
+          class="box_card rounded-lg shadow-lg bg-white"
         >
           <img
             class="w-36 h-36 object-cover rounded-full mt-2 m-auto"
@@ -98,6 +103,79 @@ const egressos = [
     habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
   },
   {
+    id: 1,
+    nome: "João Silva",
+    img: "../../assets/images/avatar-5.jpg",
+    descricao:
+      "Engenheiro de Software com 5 anos de experiência em desenvolvimento web.",
+    habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
+  },
+  {
+    id: 1,
+    nome: "João Silva",
+    img: "../../assets/images/avatar-5.jpg",
+    descricao:
+      "Engenheiro de Software com 5 anos de experiência em desenvolvimento web.",
+    habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
+  },
+  {
+    id: 1,
+    nome: "João Silva",
+    img: "../../assets/images/avatar-5.jpg",
+    descricao:
+      "Engenheiro de Software com 5 anos de experiência em desenvolvimento web.",
+    habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
+  },
+  {
+    id: 1,
+    nome: "João Silva",
+    img: "../../assets/images/avatar-5.jpg",
+    descricao:
+      "Engenheiro de Software com 5 anos de experiência em desenvolvimento web.",
+    habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
+  },
+  {
+    id: 1,
+    nome: "João Silva",
+    img: "../../assets/images/avatar-5.jpg",
+    descricao:
+      "Engenheiro de Software com 5 anos de experiência em desenvolvimento web.",
+    habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
+  },
+  {
+    id: 1,
+    nome: "João Silva",
+    img: "../../assets/images/avatar-5.jpg",
+    descricao:
+      "Engenheiro de Software com 5 anos de experiência em desenvolvimento web.",
+    habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
+  },
+  
+  {
+    id: 1,
+    nome: "João Silva",
+    img: "../../assets/images/avatar-5.jpg",
+    descricao:
+      "Engenheiro de Software com 5 anos de experiência em desenvolvimento web.",
+    habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
+  },
+  {
+    id: 1,
+    nome: "João Silva",
+    img: "../../assets/images/avatar-5.jpg",
+    descricao:
+      "Engenheiro de Software com 5 anos de experiência em desenvolvimento web.",
+    habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
+  },
+  {
+    id: 1,
+    nome: "João Silva",
+    img: "../../assets/images/avatar-5.jpg",
+    descricao:
+      "Engenheiro de Software com 5 anos de experiência em desenvolvimento web.",
+    habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
+  },
+  {
     id: 2,
     nome: "Maria Oliveira",
     img: "../../assets/images/avatar-5.jpg",
@@ -125,7 +203,7 @@ const egressos = [
 </script>
 
 <style scoped>
-/* .container {
-  max-width: 1200px;
-} */
+.box_card{
+  width: 294px;
+}
 </style>
