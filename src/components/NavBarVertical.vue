@@ -104,18 +104,20 @@
                 </div>
               </router-link>
 
-              <div
-                class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
-              >
-                <i class="fas fa-door-open text-white text-xl"></i>
-                <transition name="text">
-                  <span
-                    v-if="!isCollapsed"
-                    class="ml-2 text-white transition-opacity duration-500 ease-linear"
-                    >Sair</span
-                  >
-                </transition>
-              </div>
+              <router-link to="/logout">
+                <div
+                  class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
+                >
+                  <i class="fas fa-door-open text-white text-xl"></i>
+                  <transition name="text">
+                    <span
+                      v-if="!isCollapsed"
+                      class="ml-2 text-white transition-opacity duration-500 ease-linear"
+                      >Sair</span
+                    >
+                  </transition>
+                </div>
+              </router-link>
             </div>
           </div>
         </div>

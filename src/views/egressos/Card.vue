@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-300 py-4 items-center justify-center flex flex-col">
     <div
-      class="flex items-center justify-between px-4 space-x-3 pb-4 w-full max-w-screen-xl"
+      class="flex flex-wrap items-center justify-between px-4 space-x-3 pb-4 w-full max-w-screen-xl"
     >
       <h1 class="text-gray-800 font-bold mb-4 text-4xl">Egressos</h1>
       <div class="space-x-3 flex items-center">
@@ -54,14 +54,16 @@
               {{ habilidade }}
             </span>
           </div>
-          <div class="px-6 pb-4">
-            <a
-              :href="egresso.perfilLink"
-              class="inline-block bg-blue-500 text-white rounded-full px-3 py-1 text-sm font-semibold cursor-pointer"
-            >
-              Ver Perfil
-            </a>
-          </div>
+          <router-link to="/perfil">
+            <div class="px-6 pb-4">
+              <a
+                :href="egresso.perfilLink"
+                class="inline-block bg-blue-500 text-white rounded-full px-3 py-1 text-sm font-semibold cursor-pointer"
+              >
+                Ver Perfil
+              </a>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -150,7 +152,7 @@ const egressos = [
       "Engenheiro de Software com 5 anos de experiência em desenvolvimento web.",
     habilidades: ["JavaScript", "Vue.js", "Node.js", "SQL"],
   },
-  
+
   {
     id: 1,
     nome: "João Silva",
@@ -203,7 +205,7 @@ const egressos = [
 </script>
 
 <style scoped>
-.box_card{
+.box_card {
   width: 294px;
 }
 </style>

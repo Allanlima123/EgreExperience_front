@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        Volta para Login
     </div>
 </template>
 

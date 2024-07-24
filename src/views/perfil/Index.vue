@@ -10,14 +10,14 @@
               <button
                 class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
               >
-                Back to Home
+              Voltar para Home
               </button>
             </router-link>
             <router-link to="/perfil/editar">
               <button
                 class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
               >
-                Edit Profile
+                Editar Perfil
               </button>
             </router-link>
           </div>
