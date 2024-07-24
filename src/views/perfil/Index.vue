@@ -6,16 +6,20 @@
         <div class="flex items-center justify-between px-4 space-x-3 pb-4">
           <h1 class="text-gray-800 font-bold mb-4 text-4xl">Perfil</h1>
           <div class="space-x-3">
-            <button
-              class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
-            >
-              Back to Home
-            </button>
-            <button
-              class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
-            >
-              Edit Profile
-            </button>
+            <router-link to="/">
+              <button
+                class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
+              >
+                Back to Home
+              </button>
+            </router-link>
+            <router-link to="/perfil/editar">
+              <button
+                class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
+              >
+                Edit Profile
+              </button>
+            </router-link>
           </div>
         </div>
 
@@ -43,7 +47,6 @@
             </div>
           </div>
 
-          <!-- Parte rolável do conteúdo -->
           <div class="rounded-md w-3/4 scroll_box overflow-y-scroll">
             <div>
               <h3 class="text-gray-800 text-2xl font-semibold">

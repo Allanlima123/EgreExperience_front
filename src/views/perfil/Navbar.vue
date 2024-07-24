@@ -5,7 +5,9 @@
         <i class="fa fa-university text-2xl"></i>
         <span class="font-medium text-2xl">EgreExperience</span>
       </div>
-      <button class="text-white font-medium flex items-center space-x-1 hover:text-gray-400">
+      <button
+        class="text-white font-medium flex items-center space-x-1 hover:text-gray-400"
+      >
         <span>Logout</span>
         <i class="fa fa-sign-out"></i>
       </button>
@@ -13,9 +15,6 @@
   </nav>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -60,18 +60,20 @@
                 </transition>
               </div>
 
-              <div
-                class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
-              >
-                <i class="fa fa-users text-white text-xl"></i>
-                <transition name="text">
-                  <span
-                    v-if="!isCollapsed"
-                    class="ml-2 text-white transition-opacity duration-500 ease-linear"
-                    >Egressos</span
-                  >
-                </transition>
-              </div>
+              <router-link to="/egressos">
+                <div
+                  class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
+                >
+                  <i class="fa fa-users text-white text-xl"></i>
+                  <transition name="text">
+                    <span
+                      v-if="!isCollapsed"
+                      class="ml-2 text-white transition-opacity duration-500 ease-linear"
+                      >Egressos</span
+                    >
+                  </transition>
+                </div>
+              </router-link>
 
               <div
                 class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
@@ -87,19 +89,21 @@
               </div>
             </div>
             <div>
-              <div
-                class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
-              >
-                <i class="fa fa-cog text-white text-xl"></i>
-                <transition name="text">
-                  <span
-                    v-if="!isCollapsed"
-                    class="ml-2 text-white transition-opacity duration-500 ease-linear"
-                    >Configurações</span
-                  >
-                </transition>
-              </div>
-              
+              <router-link to="/perfil">
+                <div
+                  class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
+                >
+                  <i class="fa fa-cog text-white text-xl"></i>
+                  <transition name="text">
+                    <span
+                      v-if="!isCollapsed"
+                      class="ml-2 text-white transition-opacity duration-500 ease-linear"
+                      >Perfil</span
+                    >
+                  </transition>
+                </div>
+              </router-link>
+
               <div
                 class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
               >
@@ -121,7 +125,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const isCollapsed = ref(false);
 

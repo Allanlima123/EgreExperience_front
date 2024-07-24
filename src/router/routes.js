@@ -75,19 +75,19 @@ const routes = [
     path: "/projetos",
     name: "projetos",
     meta: {
-      title: "projeto",
+      title: "projetos",
       authRequired: false,
     },
-    component: () => import("../views/projeto/index.vue"),
+    component: () => import("../views/projetos/index.vue"),
   },
   {
     path: "/projetos/participacoes",
     name: "participacoes",
     meta: {
-      title: "projeto",
+      title: "projetos",
       authRequired: false,
     },
-    component: () => import("../views/projeto/Participacoes.vue"),
+    component: () => import("../views/projetos/Participacoes.vue"),
   },
 
   //Formação
@@ -108,6 +108,17 @@ const routes = [
       authRequired: false,
     },
     component: () => import("../views/formacao/Estudante.vue"),
+  },
+
+  //Egressos
+  {
+    path: "/egressos",
+    name: "egressos",
+    meta: {
+      title: "egressos",
+      authRequired: false,
+    },
+    component: () => import("../views/egressos/index.vue"),
   },
 ];
 
