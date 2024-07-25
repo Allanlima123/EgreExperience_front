@@ -38,7 +38,8 @@
         <div class="flex justify-center text-white text-sm font-bold mb-4">
           Ou
         </div>
-        <form>
+
+        <form @submit.prevent="userLogin">
           <div class="mb-4">
             <label class="block text-sm font-bold mb-2 text-white" for="email"
               >E-mail</label
@@ -47,7 +48,9 @@
               class="shadow appearance-none border-b-2 w-full py-2 pl-0 text-white leading-tight focus:outline-none focus:shadow-outline bg-transparent"
               id="email"
               type="text"
+              v-model="dataUser.email"
               placeholder="Seu Email"
+              required
             />
           </div>
           <div class="mb-4">
@@ -59,14 +62,16 @@
             <input
               class="shadow appearance-none border-b-2 w-full py-2 pl-0 text-white leading-tight focus:outline-none focus:shadow-outline bg-transparent"
               id="password"
+              v-model="dataUser.password"
               type="password"
               placeholder="Sua Senha"
+              required
             />
           </div>
           <div class="flex flex-col items-center space-y-4">
             <button
               class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+              type="submit"
             >
               Acessar Conta!
             </button>
@@ -84,6 +89,21 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+import axios from 'axios';
+import { reactive } from 'vue';
+
+const dataUser = reactive({
+  email: "",
+  password: ""
+})
+
+const userLogin = async () =>{
+  const response = await axios.post("http://localhost:8080/perfil", dataUser)
+
+  console.log(response)
+
+}
+</script>
 
 <style scoped></style>
