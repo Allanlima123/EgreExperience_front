@@ -48,7 +48,7 @@
               class="shadow appearance-none border-b-2 w-full py-2 pl-0 text-white leading-tight focus:outline-none focus:shadow-outline bg-transparent"
               id="email"
               type="text"
-              v-model="dataUser.email"
+              v-model="dataUser.username"
               placeholder="Seu Email"
               required
             />
@@ -94,14 +94,16 @@ import axios from 'axios';
 import { reactive } from 'vue';
 
 const dataUser = reactive({
-  email: "",
+  username: "",
   password: ""
 })
 
 const userLogin = async () =>{
-  const response = await axios.post("http://localhost:8080/perfil", dataUser)
+  console.log(dataUser);
+  
+  const response = await axios.post("http://localhost:8080/perfil", (dataUser))
 
-  console.log(response)
+  //console.log(response)
 
 }
 </script>
