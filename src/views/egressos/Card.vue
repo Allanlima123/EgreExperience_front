@@ -12,14 +12,14 @@
           <input
             type="search"
             class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-            placeholder="Pesquisar..."
+            placeholder="Pesquisar Egresso..."
           />
         </div>
         <router-link to="/">
           <button
             class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
-            Voltar para Home
+            Home
           </button>
         </router-link>
       </div>

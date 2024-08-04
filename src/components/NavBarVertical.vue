@@ -34,31 +34,35 @@
                   >
                 </transition>
               </div>
-              <div
-                class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
-              >
-                <i class="fa fa-graduation-cap text-white text-xl"></i>
-                <transition name="text">
-                  <span
-                    v-if="!isCollapsed"
-                    class="ml-2 text-white transition-opacity duration-500 ease-linear"
-                    >Formação</span
-                  >
-                </transition>
-              </div>
+              <router-link to="/formacao">
+                <div
+                  class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
+                >
+                  <i class="fa fa-graduation-cap text-white text-xl"></i>
+                  <transition name="text">
+                    <span
+                      v-if="!isCollapsed"
+                      class="ml-2 text-white transition-opacity duration-500 ease-linear"
+                      >Formação</span
+                    >
+                  </transition>
+                </div>
+              </router-link>
 
-              <div
-                class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
-              >
-                <i class="fa fa-trophy text-white text-xl"></i>
-                <transition name="text">
-                  <span
-                    v-if="!isCollapsed"
-                    class="ml-2 text-white transition-opacity duration-500 ease-linear"
-                    >Experiência</span
-                  >
-                </transition>
-              </div>
+              <router-link to="/experiencia">
+                <div
+                  class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
+                >
+                  <i class="fa fa-trophy text-white text-xl"></i>
+                  <transition name="text">
+                    <span
+                      v-if="!isCollapsed"
+                      class="ml-2 text-white transition-opacity duration-500 ease-linear"
+                      >Experiência</span
+                    >
+                  </transition>
+                </div>
+              </router-link>
 
               <router-link to="/egressos">
                 <div
@@ -75,18 +79,20 @@
                 </div>
               </router-link>
 
-              <div
-                class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
-              >
-                <i class="fa fa-cubes text-white text-xl"></i>
-                <transition name="text">
-                  <span
-                    v-if="!isCollapsed"
-                    class="ml-2 text-white transition-opacity duration-500 ease-linear"
-                    >Projetos</span
-                  >
-                </transition>
-              </div>
+              <router-link to="/projetos">
+                <div
+                  class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
+                >
+                  <i class="fa fa-cubes text-white text-xl"></i>
+                  <transition name="text">
+                    <span
+                      v-if="!isCollapsed"
+                      class="ml-2 text-white transition-opacity duration-500 ease-linear"
+                      >Projetos</span
+                    >
+                  </transition>
+                </div>
+              </router-link>
             </div>
             <div>
               <router-link to="/perfil">

@@ -16,7 +16,7 @@
         </button>
       </div>
     </HeaderMain>
-    <Estudante/>
+    <Empregos />
     <FooterMain class="bg-gray-800 p-4 left-0 right-0 flex justify-center">
       <div
         class="w-full px-6 flex items-center justify-between max-w-screen-xl"
@@ -44,7 +44,7 @@
 <script setup>
 import FooterMain from "../../components/FooterMain";
 import HeaderMain from "../../components/HeaderMain";
-import Estudante from "./Estudante.vue";
+import Empregos from "./Empregos.vue";
 </script>
 
 <style  scoped>

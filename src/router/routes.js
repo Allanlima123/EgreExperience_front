@@ -69,7 +69,6 @@ const routes = [
     component: () => import("../views/perfil/Editar.vue"),
   },
 
-
   //projeto
   {
     path: "/projetos",
@@ -79,15 +78,6 @@ const routes = [
       authRequired: false,
     },
     component: () => import("../views/projetos/index.vue"),
-  },
-  {
-    path: "/projetos/participacoes",
-    name: "participacoes",
-    meta: {
-      title: "projetos",
-      authRequired: false,
-    },
-    component: () => import("../views/projetos/Participacoes.vue"),
   },
 
   //Formação
@@ -119,6 +109,27 @@ const routes = [
       authRequired: false,
     },
     component: () => import("../views/egressos/index.vue"),
+  },
+  //Egressos
+  {
+    path: "/egressos/list",
+    name: "list",
+    meta: {
+      title: "list",
+      authRequired: false,
+    },
+    component: () => import("../views/egressos/ListEgressos.vue"),
+  },
+
+  //Experiencia
+  {
+    path: "/experiencia",
+    name: "experiencia",
+    meta: {
+      title: "experiencia",
+      authRequired: false,
+    },
+    component: () => import("../views/emprego/index.vue"),
   },
 ];
 
