@@ -97,7 +97,7 @@ const routes = [
       title: "projeto",
       authRequired: false,
     },
-    component: () => import("../views/formacao/Estudante.vue"),
+    component: () => import("../views/formacao/formacao.vue"),
   },
 
   //Egressos

@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-gray-100 py-6 flex flex-col items-center justify-center min-h-screen">
+  <main class="bg-gray-100 py-6 flex items-center flex-col min-h-screen">
     <div class="flex flex-wrap items-center justify-between px-6 space-x-4 pb-6 w-full max-w-screen-xl">
       <h1 class="text-gray-800 font-bold mb-4 text-4xl">Projetos</h1>
       <div class="space-x-4 flex items-center">
@@ -29,7 +29,7 @@
     </div>
     <div class="space-y-6 px-6 max-w-screen-xl w-full">
       <div
-        v-for="project in filteredProjects"
+        v-for="project in projects"
         :key="project.id"
         class="bg-white border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
       >
@@ -38,7 +38,7 @@
           <div class="space-x-2">
             <button
               class="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              @click="editProject(project.id)"
+              @click="$emit('editProject', project.id)"
             >
               Editar
             </button>
@@ -78,14 +78,12 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 
-// Define reatividade
 const searchQuery = ref("");
 const projects = ref([]);
 
-// Função para obter projetos
 const getProjetos = async () => {
   try {
     const res = await axios.get("http://localhost:8080/projeto");
@@ -95,23 +93,12 @@ const getProjetos = async () => {
   }
 };
 
-// Computed para filtrar projetos
-const filteredProjects = computed(() => {
-  return projects.value.filter((project) =>
-    project.nome.toLowerCase().includes(searchQuery.value.toLowerCase())
-  );
-});
-
 const formatDate = (date) => {
   if (!date) return "Não definido";
   return new Date(date).toLocaleDateString("pt-BR", {
     year: "numeric",
     month: "long",
   });
-};
-
-const editProject = (id) => {
-  console.log("Editar projeto com ID:", id);
 };
 
 const deleteProject = async(id) => {

@@ -1,5 +1,6 @@
 <template>
   <div class="bg-gray-300 w-screen">
+    
     <div
       v-if="isVisible"
       class="fixed inset-0 flex items-center justify-center z-50"

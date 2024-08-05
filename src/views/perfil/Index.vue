@@ -6,11 +6,11 @@
         <div class="flex items-center justify-between px-4 space-x-3 pb-4">
           <h1 class="text-gray-800 font-bold mb-4 text-4xl">Perfil</h1>
           <div class="space-x-3">
-            <router-link to="/">
+            <router-link to="/egressos">
               <button
                 class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
               >
-              Voltar para Home
+                Egressos
               </button>
             </router-link>
             <router-link to="/perfil/editar">
@@ -85,28 +85,6 @@
               <span
                 class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
                 >Ver Experiência Completa!</span
-              >
-            </div>
-
-            <div class="section-divider"></div>
-            <!-- Linha de divisão -->
-
-            <div>
-              <h3 class="text-gray-800 text-2xl font-semibold">
-                Certificações
-              </h3>
-              <ul class="text-gray-800 font-normal font-sans text-sm my-2">
-                <li
-                  v-for="certification in dataUser.certifications"
-                  :key="certification.name"
-                >
-                  <strong>{{ certification.name }}</strong> -
-                  {{ certification.authority }}
-                </li>
-              </ul>
-              <span
-                class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
-                >Ver todos os Certificados!</span
               >
             </div>
 

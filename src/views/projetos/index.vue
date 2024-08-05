@@ -1,6 +1,5 @@
 <template>
   <div class="min-h-screen flex flex-col">
-    <!-- Transição do Pop-up de Informações do Projeto -->
     <Teleport to="#popUp">
       <transition name="fade">
         <div
@@ -10,8 +9,11 @@
           <div
             class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full mx-4 sm:mx-auto z-10"
           >
-            <h2 class="text-xl font-semibold mb-4">Informações do Projeto</h2>
-            <form @submit.prevent="sendProjeto" class="space-y-4">
+            <h2 class="text-xl font-semibold mb-4">
+              {{ isEditMode ? "Editar Projeto" : "Informações do Projeto" }}
+            </h2>
+            <form @submit.prevent="handleSubmit" class="space-y-4">
+              <!-- Formulário do Projeto -->
               <div>
                 <label
                   for="nome"
@@ -128,7 +130,6 @@
                 </button>
               </div>
 
-              <!-- Mensagens de Feedback -->
               <div v-if="successMessage" class="text-green-600 mt-4">
                 {{ successMessage }}
               </div>
@@ -158,7 +159,7 @@
       </div>
     </HeaderMain>
 
-    <Projetos @add-novo-projeto="novoProjeto" />
+    <Projetos @add-novo-projeto="novoProjeto" @edit-project="editarProjeto" />
 
     <FooterMain class="bg-gray-800 p-4 flex justify-center">
       <div
@@ -181,6 +182,7 @@
             >
           </address>
         </div>
+
         <div class="space-x-3">
           <a href="mailto:silva12@gmail.com" class="text-white text-lg">
             <i class="fa fa-envelope"></i>
@@ -202,7 +204,9 @@ import { ref } from "vue";
 import axios from "axios";
 
 const isVisible = ref(false);
+const isEditMode = ref(false);
 const form = ref({
+  id: null,
   nome: "",
   descricao: "",
   anoInicio: "",
@@ -210,42 +214,66 @@ const form = ref({
   cidadeAtual: "",
   incluirParticipacoes: false,
 });
+
 const isLoading = ref(false);
 const errorMessage = ref(null);
 const successMessage = ref(null);
 
 const novoProjeto = () => {
   isVisible.value = true;
+  isEditMode.value = false;
+  cleanForm();
 };
 
 const closePopUp = () => {
   isVisible.value = false;
 };
 
-const sendProjeto = async () => {
+const handleSubmit = async () => {
   isLoading.value = true;
   errorMessage.value = null;
   successMessage.value = null;
 
   try {
-    await axios.post("http://localhost:8080/projeto", form.value);
-    successMessage.value = "Projeto enviado com sucesso!";
+    if (isEditMode.value) {
+      await axios.put(
+        `http://localhost:8080/projeto/${form.value.id}`,
+        form.value
+      );
+      successMessage.value = "Projeto atualizado com sucesso!";
+    } else {
+      await axios.post("http://localhost:8080/projeto", form.value);
+      successMessage.value = "Projeto criado com sucesso!";
+    }
   } catch (error) {
     errorMessage.value =
       "Ocorreu um erro ao enviar o projeto. Por favor, tente novamente.";
   } finally {
     isLoading.value = false;
-
     setTimeout(() => {
-      isVisible.value = false;
-      window.location.reload();
+      closePopUp();
       cleanForm();
+      window.location.reload();
     }, 2000);
+  }
+};
+
+const editarProjeto = async (idProjeto) => {
+  isVisible.value = true;
+  isEditMode.value = true;
+  try {
+    const response = await axios.get(
+      `http://localhost:8080/projeto/${idProjeto}`
+    );
+    form.value = { ...response.data, id: idProjeto };
+  } catch (error) {
+    console.error("Erro ao buscar projeto:", error);
   }
 };
 
 const cleanForm = () => {
   form.value = {
+    id: null,
     nome: "",
     descricao: "",
     anoInicio: "",
@@ -253,6 +281,8 @@ const cleanForm = () => {
     cidadeAtual: "",
     incluirParticipacoes: false,
   };
+
+  successMessage.value = null;
 };
 </script>
 
@@ -261,7 +291,8 @@ const cleanForm = () => {
 .fade-leave-active {
   transition: opacity 0.3s ease;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active em <2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

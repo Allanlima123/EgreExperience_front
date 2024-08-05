@@ -44,7 +44,7 @@
 <script setup>
 import FooterMain from "../../components/FooterMain";
 import HeaderMain from "../../components/HeaderMain";
-import Estudante from "./Estudante.vue";
+import Estudante from "./formacao.vue";
 </script>
 
 <style  scoped>
