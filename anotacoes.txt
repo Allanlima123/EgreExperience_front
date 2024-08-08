@@ -1,91 +1,304 @@
+<template>
+  <div class="bg-gray-300 w-screen">
+    <Teleport to="body">
+      <div
+        v-if="isWelcomeVisible"
+        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"
+      >
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+          <h2 class="text-xl font-bold mb-4">Bem-vindo(a) de volta!</h2>
+          <p class="mb-4">
+            Olá {{ "Allan" }}! Estamos felizes em tê-lo(a) conosco novamente. Antes de prosseguir, precisamos fazer algumas perguntas.
+          </p>
+          <button
+            @click="openBasicInfoModal"
+            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Começar
+          </button>
+        </div>
+      </div>
+    </Teleport>
+    
+    <!-- Modal de Informações Básicas -->
+    <Teleport to="body">
+      <div
+        v-if="isBasicInfoVisible"
+        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"
+      >
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+          <h2 class="text-xl font-bold mb-4">Informações Básicas</h2>
+          <form @submit.prevent="openProfessionalInfoModal">
+            <div class="mb-4">
+              <label for="foto" class="block text-sm font-medium mb-2">Foto (URL)</label>
+              <input
+                type="text"
+                id="foto"
+                placeholder="URL da foto"
+                class="border border-gray-300 rounded p-2 w-full"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="nome" class="block text-sm font-medium mb-2">Nome</label>
+              <input
+                type="text"
+                id="nome"
+                placeholder="Nome completo"
+                class="border border-gray-300 rounded p-2 w-full"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Próximo
+            </button>
+            <button
+              @click="closeBasicInfoModal"
+              class="ml-4 text-red-500 hover:underline"
+            >
+              Cancelar
+            </button>
+          </form>
+        </div>
+      </div>
+    </Teleport>
+    
+    <!-- Modal de Informações Profissionais -->
+    <Teleport to="body">
+      <div
+        v-if="isProfessionalInfoVisible"
+        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"
+      >
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+          <h2 class="text-xl font-bold mb-4">Informações Profissionais</h2>
+          <form @submit.prevent="openDetailedInfoModal">
+            <div class="mb-4">
+              <label for="empresa" class="block text-sm font-medium mb-2">Empresa</label>
+              <input
+                type="text"
+                id="empresa"
+                placeholder="Nome da empresa"
+                class="border border-gray-300 rounded p-2 w-full"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="cargo" class="block text-sm font-medium mb-2">Cargo</label>
+              <input
+                type="text"
+                id="cargo"
+                placeholder="Cargo"
+                class="border border-gray-300 rounded p-2 w-full"
+              />
+            </div>
+            <div class="flex items-center mb-4">
+              <input
+                type="checkbox"
+                id="remoto"
+                class="mr-2"
+              />
+              <label for="remoto" class="text-sm font-medium">Trabalho Remoto</label>
+            </div>
+            <div class="mb-4">
+              <label for="tempo" class="block text-sm font-medium mb-2">Tempo</label>
+              <input
+                type="text"
+                id="tempo"
+                placeholder="Tempo"
+                class="border border-gray-300 rounded p-2 w-full"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Próximo
+            </button>
+            <button
+              @click="closeProfessionalInfoModal"
+              class="ml-4 text-red-500 hover:underline"
+            >
+              Cancelar
+            </button>
+          </form>
+        </div>
+      </div>
+    </Teleport>
+    
+    <!-- Modal de Informações Detalhadas -->
+    <Teleport to="body">
+      <div
+        v-if="isDetailedInfoVisible"
+        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"
+      >
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+          <h2 class="text-2xl font-bold mb-6">Informações Detalhadas</h2>
+          <form @submit.prevent="handleSubmit">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <!-- Idiomas -->
+              <div class="col-span-1 md:col-span-2">
+                <label for="idiomas" class="block text-sm font-medium mb-2">Idiomas</label>
+                <select
+                  id="idiomas"
+                  multiple
+                  class="border border-gray-300 rounded p-2 w-full"
+                >
+                  <option v-for="idioma in idiomasOptions" :key="idioma" :value="idioma">
+                    {{ idioma }}
+                  </option>
+                </select>
+              </div>
 
-//       <section class="flex space-x-3 px-6 box_height">
-//         <div class="bg-gray-800 w-1/4 p-4 rounded-md">
-//           <div class="w-full flex items-center justify-center mb-3">
-//             <div>
-//               <img
-//                 src="../../assets/images/avatar-3.jpg"
-//                 alt="user IMG"
-//                 class="w-full h-full rounded-full"
-//               />
-//             </div>
-//           </div>
-//           <div>
-//             <p class="text-white font-light text-md"><strong>{{ dataUser.name }}</strong></p>
-//             <p class="text-white font-light text-md"><strong>{{ dataUser.email }}</strong></p>
-//             <p class="text-white font-light text-md"><strong>{{ dataUser.occupation }}</strong></p>
-//           </div>
-//         </div>
-//         <div class="bg-gray-800 rounded-md w-3/4 p-4 overflow-y-scroll">
-//           <h3 class="text-white font-semibold mb-2">Experiência Profissional</h3>
-//           <ul class="text-white">
-//             <li v-for="experience in dataUser.experiences" :key="experience.position">
-//               <strong>{{ experience.position }}</strong>, {{ experience.company }} ({{ experience.period }})
-//             </li>
-//           </ul>
+              <!-- Descrição Técnica -->
+              <div class="col-span-1 md:col-span-2">
+                <label for="descricaoTecnica" class="block text-sm font-medium mb-2">Descrição Técnica</label>
+                <textarea
+                  id="descricaoTecnica"
+                  placeholder="Descrição técnica"
+                  class="border border-gray-300 rounded p-2 w-full"
+                  rows="4"
+                ></textarea>
+              </div>
 
-//           <h3 class="text-white font-semibold mb-2 mt-4">Formação Acadêmica</h3>
-//           <ul class="text-white">
-//             <li><strong>{{ dataUser.education.degree }}</strong> em {{ dataUser.education.field }} - {{ dataUser.education.institution }}, {{ dataUser.education.graduationYear }}</li>
-//           </ul>
+              <!-- Nível -->
+              <div>
+                <label for="nivel" class="block text-sm font-medium mb-2">Nível</label>
+                <select
+                  id="nivel"
+                  class="border border-gray-300 rounded p-2 w-full"
+                >
+                  <option v-for="nivel in nivelOptions" :key="nivel" :value="nivel">
+                    {{ nivel }}
+                  </option>
+                </select>
+              </div>
 
-//           <h3 class="text-white font-semibold mb-2 mt-4">Habilidades</h3>
-//           <ul class="text-white">
-//             <li v-for="skill in dataUser.skills" :key="skill">{{ skill }}</li>
-//           </ul>
+              <!-- Modalidade -->
+              <div>
+                <label for="modalidade" class="block text-sm font-medium mb-2">Modalidade</label>
+                <input
+                  type="text"
+                  id="modalidade"
+                  placeholder="Modalidade"
+                  class="border border-gray-300 rounded p-2 w-full"
+                />
+              </div>
 
-//           <h3 class="text-white font-semibold mb-2 mt-4">Certificações</h3>
-//           <ul class="text-white">
-//             <li v-for="certification in dataUser.certifications" :key="certification.name">
-//               <strong>{{ certification.name }}</strong> - {{ certification.authority }}
-//             </li>
-//           </ul>
+              <!-- Ano de Início -->
+              <div>
+                <label for="anoInicio" class="block text-sm font-medium mb-2">Ano de Início</label>
+                <input
+                  type="date"
+                  id="anoInicio"
+                  class="border border-gray-300 rounded p-2 w-full"
+                />
+              </div>
 
-//           <h3 class="text-white font-semibold mb-2 mt-4">Projetos Relevantes</h3>
-//           <ul class="text-white">
-//             <li v-for="project in dataUser.projects" :key="project.name">
-//               <strong>{{ project.name }}</strong> - {{ project.description }}
-//             </li>
-//           </ul>
+              <!-- Ano de Conclusão -->
+              <div>
+                <label for="anoConclusao" class="block text-sm font-medium mb-2">Ano de Conclusão</label>
+                <input
+                  type="date"
+                  id="anoConclusao"
+                  class="border border-gray-300 rounded p-2 w-full"
+                />
+              </div>
 
-//           <h3 class="text-white font-semibold mb-2 mt-4">Interesses Profissionais</h3>
-//           <p class="text-white">{{ dataUser.professionalInterests }}</p>
-//         </div>
-//       </section>
-//     </main>
-//     <Footer />
-//   </div>
-// </template>
+              <!-- CH -->
+              <div>
+                <label for="ch" class="block text-sm font-medium mb-2">CH</label>
+                <input
+                  type="number"
+                  id="ch"
+                  placeholder="Carga horária"
+                  class="border border-gray-300 rounded p-2 w-full"
+                />
+              </div>
 
-// <script setup>
-// import NavBar from "../perfil/Navbar.vue";
-// import Footer from "../perfil/Footer.vue";
+              <!-- Email -->
+              <div>
+                <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                  class="border border-gray-300 rounded p-2 w-full"
+                />
+              </div>
 
-// const dataUser = {
-//   experiences: [
-//     { position: 'Desenvolvedor Full Stack', company: 'Empresa X', period: '2019-2023' },
-//     { position: 'Estagiário de Desenvolvimento', company: 'Empresa Y', period: '2018-2019' }
-//   ],
-//   education: {
-//     degree: 'Bacharelado',
-//     field: 'Engenharia de Software',
-//     institution: 'Universidade ABC',
-//     graduationYear: '2018'
-//   },
-//   skills: ['JavaScript', 'Vue.js', 'Node.js', 'SQL'],
-//   certifications: [
-//     { name: 'Certificação em Desenvolvimento Web', authority: 'Certificadora ABC' }
-//   ],
-//   projects: [
-//     { name: 'Sistema de Gestão Escolar', description: 'Desenvolvimento de um sistema web para gestão escolar' }
-//   ],
-//   professionalInterests: 'Desenvolvimento de software, tecnologias emergentes, UX/UI'
-// };
-// </script>
+              <!-- Password -->
+              <div>
+                <label for="password" class="block text-sm font-medium mb-2">Senha</label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Senha"
+                  class="border border-gray-300 rounded p-2 w-full"
+                />
+              </div>
+            </div>
 
-// <style scoped>
-// .box_height {
-//   min-height: 24rem;
-// }
-// </style>
-// 
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Enviar
+            </button>
+            <button
+              @click="closeDetailedInfoModal"
+              class="ml-4 text-red-500 hover:underline"
+            >
+              Cancelar
+            </button>
+          </form>
+        </div>
+      </div>
+    </Teleport>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const isWelcomeVisible = ref(true);
+const isBasicInfoVisible = ref(false);
+const isProfessionalInfoVisible = ref(false);
+const isDetailedInfoVisible = ref(false);
+
+const openBasicInfoModal = () => {
+  isWelcomeVisible.value = false;
+  isBasicInfoVisible.value = true;
+};
+
+const closeBasicInfoModal = () => {
+  isBasicInfoVisible.value = false;
+};
+
+const openProfessionalInfoModal = () => {
+  isBasicInfoVisible.value = false;
+  isProfessionalInfoVisible.value = true;
+};
+
+const closeProfessionalInfoModal = () => {
+  isProfessionalInfoVisible.value = false;
+};
+
+const openDetailedInfoModal = () => {
+  isProfessionalInfoVisible.value = false;
+  isDetailedInfoVisible.value = true;
+};
+
+const closeDetailedInfoModal = () => {
+  isDetailedInfoVisible.value = false;
+};
+
+const handleSubmit = () => {
+  // Handle form submission
+  console.log("Formulário enviado!");
+  closeDetailedInfoModal();
+};
+</script>
+
+<style scoped>
+/* Adicione estilos personalizados se necessário */
+</style>
