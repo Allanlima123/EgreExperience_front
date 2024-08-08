@@ -1,107 +1,70 @@
 <template>
   <div class="bg-gray-300 w-screen">
-    
-    <div
-      v-if="isVisible"
-      class="fixed inset-0 flex items-center justify-center z-50"
-    >
+    <Teleport to="#popUp">
       <div
-        class="fixed inset-0 bg-gray-600 opacity-50"
-        @click="closePopup"
-      ></div>
-      <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto z-10">
-        <h2 class="text-xl font-semibold mb-4">Informações do Projeto</h2>
-        <form @submit.prevent="handleSubmit" class="space-y-4">
-          <!-- Nome do Projeto -->
-          <div class="mb-4">
-            <label for="nome" class="block text-sm font-medium text-gray-700"
-              >Nome do Projeto</label
-            >
-            <input
-              v-model="form.nome"
-              type="text"
-              id="nome"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
-          </div>
+        v-if="isVisible || isVisibleForm"
+        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"
+        @click.self="closePopup"
+      >
+        <div
+          v-if="isVisible"
+          class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full"
+        >
+          <h2 class="text-xl font-bold mb-4">Bem-vindo(a) de volta!</h2>
+          <p class="mb-4">
+            Olá {{ "Allan" }}! Estamos felizes em tê-lo(a) conosco novamente.
+            Antes de prosseguir, precisamos fazer algumas perguntas.
+          </p>
+          <button
+            @click="openFormModal"
+            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Começar
+          </button>
+        </div>
 
-          <!-- Descrição do Projeto -->
-          <div class="mb-4">
-            <label
-              for="descricao"
-              class="block text-sm font-medium text-gray-700"
-              >Descrição</label
-            >
-            <textarea
-              v-model="form.descricao"
-              id="descricao"
-              rows="4"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            ></textarea>
-          </div>
-
-          <!-- Ano de Início -->
-          <div class="mb-4">
-            <label
-              for="anoInicio"
-              class="block text-sm font-medium text-gray-700"
-              >Ano de Início</label
-            >
-            <input
-              v-model="form.anoInicio"
-              type="date"
-              id="anoInicio"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
-          </div>
-
-          <!-- Ano de Conclusão -->
-          <div class="mb-4">
-            <label
-              for="anoConclusao"
-              class="block text-sm font-medium text-gray-700"
-              >Ano de Conclusão</label
-            >
-            <input
-              v-model="form.anoConclusao"
-              type="date"
-              id="anoConclusao"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
-          </div>
-
-          <!-- Cidade Atual -->
-          <div class="mb-4">
-            <label
-              for="cidadeAtual"
-              class="block text-sm font-medium text-gray-700"
-              >Cidade Atual</label
-            >
-            <input
-              v-model="form.cidadeAtual"
-              type="text"
-              id="cidadeAtual"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              required
-            />
-          </div>
-
-          <!-- Botão de Enviar -->
-          <div>
+        <div
+          v-if="isVisibleForm"
+          class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full"
+        >
+          <h2 class="text-xl font-bold mb-4">Formulário de Perguntas</h2>
+          <form @submit.prevent="handleSubmit">
+            <div class="mb-4">
+              <label for="question1" class="block text-sm font-medium mb-2">
+                Pergunta 1
+              </label>
+              <input
+                type="text"
+                id="question1"
+                class="border border-gray-300 rounded p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="question2" class="block text-sm font-medium mb-2">
+                Pergunta 2
+              </label>
+              <input
+                type="text"
+                id="question2"
+                class="border border-gray-300 rounded p-2 w-full"
+                required
+              />
+            </div>
             <button
               type="submit"
-              class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             >
-              Salvar
+              Enviar
             </button>
-          </div>
-        </form>
+          </form>
+          <button @click="closePopup" class="mt-4 text-red-500 hover:underline">
+            Cancelar
+          </button>
+        </div>
       </div>
-    </div>
+    </Teleport>
+
     <div class="flex gap-4">
       <NavBar />
 
@@ -176,27 +139,35 @@
 import NavBar from "@/components/NavBarVertical.vue";
 import { ref, onMounted } from "vue";
 
-const props = defineProps({
-  studentName: {
-    type: String,
-    default: "",
-  },
-});
-
 const isVisible = ref(false);
+const isVisibleForm = ref(false);
 
-onMounted(() => {
-  const popupShown = localStorage.getItem("popupShown");
-
-  if (!popupShown) {
-    isVisible.value = true;
-    localStorage.setItem("popupShown", "true");
+const initializePopup = () => {
+  try {
+    const popupShown = localStorage.getItem("popupShown");
+    if (!popupShown) {
+      isVisible.value = true;
+    }
+  } catch (error) {
+    console.error("Erro ao acessar o localStorage:", error);
   }
-});
+};
+
+const openFormModal = () => {
+  isVisible.value = false;
+  isVisibleForm.value = true;
+  try {
+    localStorage.setItem("popupShown", "true");
+  } catch (error) {
+    console.error("Erro ao definir o item no localStorage:", error);
+  }
+};
 
 const closePopup = () => {
-  isVisible.value = false;
+  isVisibleForm.value = false;
 };
+
+onMounted(initializePopup);
 </script>
 
 <style scoped>

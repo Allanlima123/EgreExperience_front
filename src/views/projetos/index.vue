@@ -218,6 +218,7 @@ const form = ref({
 const isLoading = ref(false);
 const errorMessage = ref(null);
 const successMessage = ref(null);
+const API_URL = "http://localhost:8080/projeto";
 
 const novoProjeto = () => {
   isVisible.value = true;
@@ -236,24 +237,32 @@ const handleSubmit = async () => {
 
   try {
     if (isEditMode.value) {
-      await axios.put(
-        `http://localhost:8080/projeto/${form.value.id}`,
-        form.value
-      );
+      await axios.put(`${API_URL}/${form.value.id}`, form.value);
       successMessage.value = "Projeto atualizado com sucesso!";
     } else {
-      await axios.post("http://localhost:8080/projeto", form.value);
+      await axios.post(API_URL, form.value);
       successMessage.value = "Projeto criado com sucesso!";
     }
   } catch (error) {
-    errorMessage.value =
-      "Ocorreu um erro ao enviar o projeto. Por favor, tente novamente.";
+    if (error.response) {
+      // Erro com resposta do servidor
+      errorMessage.value = `Erro: ${
+        error.response.data.message ||
+        "Ocorreu um erro ao enviar o projeto. Por favor, tente novamente."
+      }`;
+    } else if (error.request) {
+      // Erro de solicitação, sem resposta
+      errorMessage.value =
+        "Nenhuma resposta recebida do servidor. Verifique sua conexão e tente novamente.";
+    } else {
+      // Erro ao configurar a solicitação
+      errorMessage.value = `Erro ao configurar a solicitação: ${error.message}`;
+    }
   } finally {
     isLoading.value = false;
     setTimeout(() => {
       closePopUp();
       cleanForm();
-      window.location.reload();
     }, 2000);
   }
 };
@@ -262,12 +271,12 @@ const editarProjeto = async (idProjeto) => {
   isVisible.value = true;
   isEditMode.value = true;
   try {
-    const response = await axios.get(
-      `http://localhost:8080/projeto/${idProjeto}`
-    );
+    const response = await axios.get(`${API_URL}/${idProjeto}`);
     form.value = { ...response.data, id: idProjeto };
   } catch (error) {
     console.error("Erro ao buscar projeto:", error);
+    errorMessage.value =
+      "Erro ao buscar o projeto. Por favor, tente novamente.";
   }
 };
 
