@@ -95,7 +95,7 @@
               </router-link>
             </div>
             <div>
-              <router-link to="/perfil">
+              <router-link :to='`/perfil/${username}`'>
                 <div
                   class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
                 >
@@ -136,6 +136,8 @@
 import { ref } from "vue";
 
 const isCollapsed = ref(false);
+
+const username = localStorage.getItem('username') || 'allan lima';
 
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;

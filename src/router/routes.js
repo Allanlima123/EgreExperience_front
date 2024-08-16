@@ -10,7 +10,7 @@ const routes = [
     },
     component: Home,
   },
-
+  
   //Rotas Login
   {
     path: "/",
@@ -51,7 +51,7 @@ const routes = [
 
   //Perfil
   {
-    path: "/perfil",
+    path: '/perfil/:username',
     name: "perfil",
     meta: {
       title: "index",

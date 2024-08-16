@@ -28,24 +28,24 @@
     </div>
     <div class="space-y-6 max-w-screen-xl w-full px-4">
       <div
-        v-for="experience in experiences"
-        :key="experience.id"
+        v-for="experiencia in experiencias"
+        :key="experiencia.id"
         class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
       >
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-blue-600">
-            {{ experience.empresa }}
+            {{ experiencia.empresa }}
           </h2>
           <div class="space-x-2">
             <button
               class="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              @click="$emit('editarFormacao', experience.id)"
+              @click="$emit('editarFormacao', experiencia.id)"
             >
               Editar
             </button>
             <button
               class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-              @click="deleteFormacao(experience.id)"
+              @click="deleteFormacao(experiencia.id)"
             >
               Deletar
             </button>
@@ -53,32 +53,32 @@
         </div>
 
         <div class="mb-4">
-          <p class="text-gray-700 text-lg font-semibold">
-            <strong>Cargo:</strong> {{ experience.cargo }}
+          <p class="text-gray-600 font-semibold">
+            <strong>Cargo:</strong> {{ experiencia.cargo }}
           </p>
 
           <div class="flex">
-            <p class="mr-2">
+            <p class="mr-2 text-gray-600">
               <strong>Modalidade:</strong>
             </p>
             <span
               :class="
-                experience.remoto
+              experiencia.remoto
                   ? 'bg-green-100 text-green-800'
                   : 'bg-red-100 text-red-800'
               "
               class="py-1 px-4 rounded-full text-sm font-medium"
             >
-              {{ experience.remoto ? "Remoto" : "Presencial" }}</span
+              {{ experiencia.remoto ? "Remoto" : "Presencial" }}</span
             >
           </div>
 
           <p class="text-gray-600">
-            <strong>Tempo:</strong> {{ experience.tempo }}
+            <strong>Tempo:</strong> {{ experiencia.tempo }}
           </p>
         </div>
-        <p class="text-gray-700 mt-2">
-          <strong>Descrição:</strong> {{ experience.descricaoProficional }}
+        <p class="text-gray-600 mt-2">
+          <strong>Descrição:</strong> {{ experiencia.descricaoProficional }}
         </p>
       </div>
     </div>
@@ -89,17 +89,13 @@
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-const experiences = ref([]);
+const experiencias = ref([]);
 
-const getExperiencia = async() =>{
-  try {
-    const res = await axios.get("http://localhost:8080/emprego");
-    console.log(res)
-    experiences.value = res.data;
-  } catch (error) {
-    console.error("Erro ao buscar Empregos:", error);
-  }
-}
+const getExperiencia = async () => {
+  const { data } = await axios.get(`http://localhost:8080/estudante/2`);
+  console.log(data)
+  experiencias.value = data.empregos;
+};
 
 onMounted(() =>{
   getExperiencia()

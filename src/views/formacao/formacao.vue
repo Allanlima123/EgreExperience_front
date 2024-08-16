@@ -13,7 +13,6 @@
             type="search"
             class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
             placeholder="Pesquisar Curso..."
-            v-model="searchQuery"
           />
         </div>
         <router-link to="/">
@@ -27,42 +26,42 @@
     </div>
     <div class="space-y-6 max-w-screen-xl w-full px-4">
       <div
-        v-for="project in formacaoEstudante"
-        :key="project.id"
+        v-for="curso in formacaoEstudante"
+        :key="curso.id"
         class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
       >
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-blue-600">
-            {{ project.nome }}
+            {{ curso.nome }}
           </h2>
 
           <div class="space-x-2">
             <button
               class="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              @click="$emit('editProject', project.id)"
+              @click="$emit('editProject', curso.id)"
             >
               Editar
             </button>
             <button
               class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-              @click="deleteProject(project.id)"
+              @click="deleteProject(curso.id)"
             >
               Deletar
             </button>
           </div>
         </div>
         <p class="text-gray-700 mt-2">
-          <strong>Modalidade:</strong> {{ project.modalidade }}
+          <strong>Modalidade:</strong> {{ curso.modalidade }}
         </p>
         <p class="text-gray-600 mt-1">
-          <strong>Ano de Início:</strong> {{ formatDate(project.anoInicio) }}
+          <strong>Ano de Início:</strong> {{ curso.anoInicio }}
         </p>
         <p class="text-gray-600 mt-1">
           <strong>Ano de Conclusão:</strong>
-          {{ formatDate(project.anoConclusao) }}
+          {{ curso.anoConclusao }}
         </p>
         <p class="text-gray-600 mt-1">
-          <strong>Carga Horária:</strong> {{ project.ch }} horas
+          <strong>Carga Horária:</strong> {{ curso.ch }} horas
         </p>
       </div>
     </div>
@@ -76,15 +75,9 @@ import axios from "axios";
 const formacaoEstudante = ref([]);
 
 const getFormacao = async () => {
-  const res = await axios.get("http://localhost:8080/curso");
-  formacaoEstudante.value = res.data;
-};
-
-const formatDate = (date) => {
-  return new Intl.DateTimeFormat("pt-BR", {
-    year: "numeric",
-    month: "long",
-  }).format(date);
+  const res = await axios.get(`http://localhost:8080/estudante/${2}`);
+  console.log(res.data.cursos)
+  formacaoEstudante.value = res.data.cursos;
 };
 
 onMounted(() => {

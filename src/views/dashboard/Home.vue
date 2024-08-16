@@ -25,234 +25,91 @@
 
         <div
           v-if="isVisibleForm"
-          class="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto"
+          class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto"
         >
-          <h2 class="text-2xl font-bold mb-6">Formulário de Informações</h2>
+          <h2 class="text-2xl font-bold mb-4">Formulário de Dados</h2>
           <form @submit.prevent="handleSubmit">
-            <div class="grid grid-cols-6 md:grid-cols-6 gap-4 mb-4">
-              <div class="col-span-3">
-                <label for="nome" class="block text-sm font-medium mb-2"
-                  >Nome</label
-                >
+            <div class="flex gap-2">
+              <div class="mb-4 w-full">
+                <label for="nome" class="block text-gray-700">Nome</label>
                 <input
-                  type="text"
                   id="nome"
-                  placeholder="Nome completo"
-                  class="border border-gray-300 rounded p-2 w-full"
+                  type="text"
+                  v-model="formData.nome"
+                  class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                  required
                 />
               </div>
 
-              <div class="col-span-3">
-                <label for="foto" class="block text-sm font-medium mb-2"
-                  >Foto (URL)</label
+              <div class="mb-4 w-full">
+                <label for="cargoAtual" class="block text-gray-700"
+                  >Cargo Atual</label
                 >
                 <input
+                  id="cargoAtual"
                   type="text"
-                  id="foto"
-                  placeholder="URL da foto"
-                  class="border border-gray-300 rounded p-2 w-full"
+                  v-model="formData.cargoAtual"
+                  required
+                  class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                 />
               </div>
+            </div>
 
-              <div class="col-span-3">
-                <label for="empresa" class="block text-sm font-medium mb-2"
-                  >Empresa</label
-                >
-                <input
-                  type="text"
-                  id="empresa"
-                  placeholder="Nome da empresa"
-                  class="border border-gray-300 rounded p-2 w-full"
-                />
-              </div>
+            <div class="mb-4 w-full">
+              <label for="foto" class="block text-gray-700">Foto</label>
+              <input
+                id="foto"
+                type="text"
+                placeholder="Link de uma Imagem"
+                v-model="formData.foto"
+                required
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+              />
+            </div>
 
-              <div class="col-span-3">
-                <label for="cargo" class="block text-sm font-medium mb-2"
-                  >Cargo</label
-                >
-                <input
-                  type="text"
-                  id="cargo"
-                  placeholder="Cargo"
-                  class="border border-gray-300 rounded p-2 w-full"
-                />
-              </div>
+            <div class="mb-4">
+              <label for="anoFormacao" class="block text-gray-700"
+                >Ano de Formação</label
+              >
+              <input
+                id="anoFormacao"
+                type="date"
+                v-model="dataObservation"
+                required
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+              />
+            </div>
 
-              <div class="col-span-1 md:col-span-2">
-                <label
-                  for="descricaoTecnica"
-                  class="block text-sm font-medium mb-2"
-                  >Descrição Técnica</label
+            <div class="mb-6">
+              <label class="block text-lg font-semibold text-gray-800 mb-2"
+                >Idiomas</label
+              >
+              <div class="flex flex-wrap gap-4">
+                <div
+                  v-for="(idioma, index) in idiomas"
+                  :key="index"
+                  class="flex items-center"
                 >
-                <textarea
-                  id="descricaoTecnica"
-                  placeholder="Descrição técnica"
-                  class="border border-gray-300 rounded p-2 w-full"
-                  rows="4"
-                ></textarea>
-              </div>
-
-              <!-- Nível -->
-              <!-- <div>
-                <label for="nivel" class="block text-sm font-medium mb-2"
-                  >Nível</label
-                >
-                <select
-                  id="nivel"
-                  class="border border-gray-300 rounded p-2 w-full"
-                >
-                  <option
-                    v-for="nivel in nivelOptions"
-                    :key="nivel"
-                    :value="nivel"
+                  <input
+                    type="checkbox"
+                    :id="`idioma-${index}`"
+                    :value="idioma"
+                    v-model="formData.idiomas"
+                    class="h-4 w-4 cursor-pointer text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label
+                    :for="`idioma-${index}`"
+                    class="ml-2 text-gray-700 text-sm"
                   >
-                    {{ nivel }}
-                  </option>
-                </select>
-              </div> -->
-
-              <!-- <div class="col-span-1 md:col-span-2">
-                <label for="idiomas" class="block text-sm font-medium mb-2"
-                  >Idiomas</label
-                >
-                <ul class="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-3">
-                  <li
-                    v-for="idioma in idiomasOptions"
-                    :key="idioma"
-                    class="flex items-center"
-                  >
-                    <input
-                      type="checkbox"
-                      :id="idioma"
-                      :value="idioma"
-                      v-model="selectedIdiomas"
-                      class="mr-2 h-4 w-4 cursor-pointer"
-                    />
-                    <label :for="idioma" class="text-sm">{{ idioma }}</label>
-                  </li>
-                </ul>
-              </div> -->
-
-              <!-- Empresa -->
-
-              <!-- Remoto -->
-              <!-- <div class="flex items-center mb-4">
-                <input type="checkbox" id="remoto" class="mr-2" />
-                <label for="remoto" class="text-sm font-medium"
-                  >Trabalho Remoto</label
-                >
-              </div> -->
-
-              <!-- Cargo -->
-
-              <!-- Tempo -->
-              <!-- <div>
-                <label for="tempo" class="block text-sm font-medium mb-2"
-                  >Tempo</label
-                >
-                <input
-                  type="text"
-                  id="tempo"
-                  placeholder="Tempo"
-                  class="border border-gray-300 rounded p-2 w-full"
-                />
-              </div> -->
-
-              <!-- Descrição Profissional -->
-              <!-- <div class="col-span-1 md:col-span-2">
-                <label
-                  for="descricaoProficional"
-                  class="block text-sm font-medium mb-2"
-                  >Descrição Profissional</label
-                >
-                <textarea
-                  id="descricaoProficional"
-                  placeholder="Descrição profissional"
-                  class="border border-gray-300 rounded p-2 w-full"
-                  rows="4"
-                ></textarea>
-              </div> -->
-
-              <!-- Modalidade -->
-              <!-- <div>
-                <label for="modalidade" class="block text-sm font-medium mb-2"
-                  >Modalidade</label
-                >
-                <input
-                  type="text"
-                  id="modalidade"
-                  placeholder="Modalidade"
-                  class="border border-gray-300 rounded p-2 w-full"
-                />
-              </div> -->
-
-              <!-- Ano de Início -->
-              <!-- <div>
-                <label for="anoInicio" class="block text-sm font-medium mb-2"
-                  >Ano de Início</label
-                >
-                <input
-                  type="date"
-                  id="anoInicio"
-                  class="border border-gray-300 rounded p-2 w-full"
-                />
-              </div> -->
-
-              <!-- Ano de Conclusão -->
-              <!-- <div>
-                <label for="anoConclusao" class="block text-sm font-medium mb-2"
-                  >Ano de Conclusão</label
-                >
-                <input
-                  type="date"
-                  id="anoConclusao"
-                  class="border border-gray-300 rounded p-2 w-full"
-                />
-              </div> -->
-
-              <!-- CH -->
-              <!-- <div>
-                <label for="ch" class="block text-sm font-medium mb-2"
-                  >CH</label
-                >
-                <input
-                  type="number"
-                  id="ch"
-                  placeholder="Carga horária"
-                  class="border border-gray-300 rounded p-2 w-full"
-                />
-              </div> -->
-
-              <!-- Email -->
-              <!-- <div>
-                <label for="email" class="block text-sm font-medium mb-2"
-                  >Email</label
-                >
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Email"
-                  class="border border-gray-300 rounded p-2 w-full"
-                />
-              </div> -->
-
-              <!-- Password
-              <div>
-                <label for="password" class="block text-sm font-medium mb-2"
-                  >Senha</label
-                >
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="Senha"
-                  class="border border-gray-300 rounded p-2 w-full"
-                />
-              </div> -->
+                    {{ idioma }}
+                  </label>
+                </div>
+              </div>
             </div>
 
             <button
               type="submit"
-              class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              class="px-4 py-2 bg-green-500 text-white rounded-md"
             >
               Enviar
             </button>
@@ -262,7 +119,7 @@
     </Teleport>
 
     <div class="flex gap-4">
-      <NavBar />
+      <NavBarVertical />
 
       <div class="w-full flex flex-col h-screen overflow-y-scroll relative">
         <header
@@ -332,12 +189,13 @@
 </template>
 
 <script setup>
-import NavBar from "@/components/NavBarVertical.vue";
-import { ref, onMounted } from "vue";
+import NavBarVertical from "@/components/NavBarVertical.vue";
+import { ref, reactive, onMounted, watch } from "vue";
+import axios from "axios";
 
 const isVisible = ref(false);
 const isVisibleForm = ref(false);
-const idiomasOptions = [
+const idiomas = [
   "INGLES",
   "ESPANHOL",
   "PORTUGUES",
@@ -355,14 +213,31 @@ const idiomasOptions = [
   "POLONES",
 ];
 
-const nivelOptions = ["BASICO", "INTERMEDIARIO", "AVANCADO"];
+const dataObservation = ref("");
 
-const initializePopup = () => {
+const formData = reactive({
+  anoFormacao: "",
+  foto: "",
+  nome: "",
+  cargoAtual: "",
+  idiomas: [],
+  perfilId: 0,
+});
+
+const fetchPerfil = async (idPerfil = 1) => {
   try {
-    const popupShown = localStorage.getItem("popupShown");
-    if (!popupShown) {
-      isVisible.value = true;
-    }
+    const { data } = await axios.get(
+      `http://localhost:8080/perfil/${idPerfil}`
+    );
+    formData.perfilId = data.id;
+  } catch (error) {
+    console.error("Erro ao buscar perfil:", error);
+  }
+};
+
+const checkPopupVisibility = () => {
+  try {
+    isVisible.value = !localStorage.getItem("popupShown");
   } catch (error) {
     console.error("Erro ao acessar o localStorage:", error);
   }
@@ -371,6 +246,7 @@ const initializePopup = () => {
 const openFormModal = () => {
   isVisible.value = false;
   isVisibleForm.value = true;
+
   try {
     localStorage.setItem("popupShown", "true");
   } catch (error) {
@@ -378,11 +254,39 @@ const openFormModal = () => {
   }
 };
 
+const handleSubmit = async () => {
+  isVisibleForm.value = false;
+
+  try {
+    const response = await axios.post(
+      `http://localhost:8080/estudante`,
+      formData
+    );
+    console.log("Estudante enviado com sucesso:", response.data);
+  } catch (error) {
+    console.error("Erro ao enviar Estudante:", error);
+  }
+};
+
+const formatDate = (dateString) => {
+  if (!dateString) return "";
+  const [year, month, day] = dateString.split("-");
+  return `${day}/${month}/${year}`;
+};
+
+watch(dataObservation, (newValue) => {
+  formData.anoFormacao = formatDate(newValue);
+});
+
 const closePopup = () => {
   isVisibleForm.value = false;
 };
 
-onMounted(initializePopup);
+// Lifecycle Hook
+onMounted(() => {
+  checkPopupVisibility();
+  fetchPerfil();
+});
 </script>
 
 <style scoped>
