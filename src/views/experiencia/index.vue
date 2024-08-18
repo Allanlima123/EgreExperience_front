@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <HeaderMain class="bg-gray-800 p-4 flex justify-center">
+  <div class="min-h-screen flex flex-col">
+    <HeaderMain class="bg-gray-800 p-4 flex justify-center">
       <div
         class="px-4 flex items-center justify-between max-w-screen-xl w-full"
       >
@@ -16,7 +16,9 @@
         </button>
       </div>
     </HeaderMain>
-    <Empregos />
+
+    <ListaExperiencias />
+
     <FooterMain class="bg-gray-800 p-4 left-0 right-0 flex justify-center">
       <div
         class="w-full px-6 flex items-center justify-between max-w-screen-xl"
@@ -38,15 +40,13 @@
         </div>
       </div>
     </FooterMain>
-    </div>
+  </div>
 </template>
 
 <script setup>
 import FooterMain from "../../components/FooterMain";
 import HeaderMain from "../../components/HeaderMain";
-import Empregos from "./Empregos.vue";
+import ListaExperiencias from "./ListaExperiencias.vue";
 </script>
 
-<style  scoped>
-
-</style>
+<style scoped></style>

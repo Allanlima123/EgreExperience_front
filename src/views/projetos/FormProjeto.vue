@@ -9,7 +9,7 @@
           class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full mx-4 sm:mx-auto z-100"
         >
           <h2 class="text-xl font-semibold mb-4">
-            {{ props.isEditMode ? "Editar Projeto" : "Novo do Projeto" }}
+            {{ props.isEditMode ? "Editar Projeto" : "Novo Projeto" }}
           </h2>
           <form @submit.prevent="handleSubmit" class="space-y-4">
             <div>
@@ -118,6 +118,7 @@
     </transition>
   </Teleport>
 </template>
+
 <script setup>
 import { ref, reactive, defineProps, defineEmits, onMounted } from "vue";
 import axios from "axios";
@@ -149,7 +150,7 @@ const formProjeto = reactive({
 
 const fetchEstudante = async () => {
   try {
-    const { data } = await axios.get(`http://localhost:8080/estudante/1`);
+    const { data } = await axios.get(`http://localhost:8080/estudante/${1}`);
     formProjeto.estudanteId = data.id;
   } catch (error) {
     console.error("Estudante não encontrado na base de Dados.", error);
@@ -189,6 +190,7 @@ const handleSubmit = async () => {
     setTimeout(() => {
       cleanForm();
       closeModal();
+      location.reload();
     }, 2000);
   }
 };

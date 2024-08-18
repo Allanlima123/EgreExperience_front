@@ -90,15 +90,15 @@ const routes = [
     },
     component: () => import("../views/formacao/index.vue"),
   },
-  {
-    path: "/formacao/estudante",
-    name: "participacoes",
-    meta: {
-      title: "projeto",
-      authRequired: false,
-    },
-    component: () => import("../views/formacao/formacao.vue"),
-  },
+  // {
+  //   path: "/formacao/estudante",
+  //   name: "participacoes",
+  //   meta: {
+  //     title: "projeto",
+  //     authRequired: false,
+  //   },
+  //   component: () => import("../views/formacao/Formacoes.vue"),
+  // },
 
   //Egressos
   {
@@ -118,7 +118,7 @@ const routes = [
       title: "list",
       authRequired: false,
     },
-    component: () => import("../views/egressos/ListEgressos.vue"),
+    component: () => import("../views/egressos/ListaEgressos.vue"),
   },
 
   //Experiencia
@@ -129,7 +129,7 @@ const routes = [
       title: "experiencia",
       authRequired: false,
     },
-    component: () => import("../views/emprego/index.vue"),
+    component: () => import("../views/experiencia/index.vue"),
   },
 ];
 

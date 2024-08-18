@@ -135,82 +135,114 @@
 
     <section class="space-y-6 px-6 max-w-screen-xl w-full">
       <div
-        v-for="projeto in projetos"
-        :key="projeto.id"
-        class="bg-white border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
+        v-if="projetos.length"
+        class="space-y-6 max-w-screen-xl w-full"
       >
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-blue-600">
-            {{ projeto.nome }}
-          </h2>
-          <div class="space-x-2">
-            <button
-              class="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
-              aria-label="Adicionar Participação"
-              @click="addNovaParticipacao(projeto.id)"
-            >
-              Add Participação
-            </button>
-            <button
-              class="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label="Editar Projeto"
-              @click="editarProjeto(projeto.id)"
-            >
-              Editar
-            </button>
-            <button
-              class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-              aria-label="Deletar Projeto"
-              @click="deletarProjeto(projeto.id)"
-            >
-              Deletar
-            </button>
-          </div>
-        </div>
-        <p class="text-gray-700 mt-2">{{ projeto.descricao }}</p>
-        <p class="text-gray-600 mt-1">
-          <strong>Ano de Início:</strong> {{ projeto.anoInicio }}
-        </p>
-        <p class="text-gray-600 mt-1">
-          <strong>Ano de Conclusão:</strong> {{ projeto.anoConclusao }}
-        </p>
-        <p class="text-gray-600 mt-1">
-          <strong>Cidade Atual:</strong> {{ projeto.cidadeAtual }}
-        </p>
-        <div class="mt-4">
-          <h3 class="text-lg font-medium text-gray-800">Participações</h3>
-          <div v-if="participacoes">
-            <ul class="list-none list-inside mt-2 space-y-4">
-              <li
-                v-for="participacao in participacoes"
-                :key="participacao.id"
-                class="p-4 bg-white rounded-lg shadow-md border border-gray-200 flex items-start justify-between"
+        <div
+          v-for="projeto in projetos"
+          :key="projeto.id"
+          class="bg-white border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
+        >
+          <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-semibold text-blue-600">
+              {{ projeto.nome }}
+            </h2>
+            <div class="space-x-2">
+              <button
+                class="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                aria-label="Adicionar Participação"
+                @click="addNovaParticipacao(projeto.id)"
               >
-                <div class="flex-1">
-                  <div class="mb-2">
-                    <span class="font-semibold text-gray-800">Nome:</span>
-                    <span class="ml-2 text-gray-600">{{
-                      participacao.nome
-                    }}</span>
-                  </div>
-                  <div class="mb-2">
-                    <span class="font-semibold text-gray-800">Cargo:</span>
-                    <span class="ml-2 text-gray-600">{{
-                      participacao.papel
-                    }}</span>
-                  </div>
-                  <div class="mb-2">
-                    <span class="font-semibold text-gray-800">Nível:</span>
-                    <span class="ml-2 text-gray-600">
-                      {{ participacao.nivel }}
-                    </span>
-                  </div>
-                </div>
-              </li>
-            </ul>
+                Add Participação
+              </button>
+              <button
+                class="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Editar Projeto"
+                @click="editarProjeto(projeto.id)"
+              >
+                Editar
+              </button>
+              <button
+                class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                aria-label="Deletar Projeto"
+                @click="deletarProjeto(projeto.id)"
+              >
+                Deletar
+              </button>
+            </div>
           </div>
-          <span v-else class="text-gray-600 italic">Sem Participações</span>
+          <p class="text-gray-700 mt-2">{{ projeto.descricao }}</p>
+          <p class="text-gray-600 mt-1">
+            <strong>Ano de Início:</strong> {{ projeto.anoInicio }}
+          </p>
+          <p class="text-gray-600 mt-1">
+            <strong>Ano de Conclusão:</strong> {{ projeto.anoConclusao }}
+          </p>
+          <p class="text-gray-600 mt-1">
+            <strong>Cidade Atual:</strong> {{ projeto.cidadeAtual }}
+          </p>
+          <div class="mt-4">
+            <h3 class="text-lg font-medium text-gray-800 mb-2">
+              Participações
+            </h3>
+            <div class="overflow-x-auto h-40">
+              <div class="max-h-80 shadow-sm">
+                <table class="min-w-full bg-white">
+                  <thead class="bg-gray-50 sticky top-0">
+                    <tr>
+                      <th class="py-3 px-4 text-left text-gray-700">Nome</th>
+                      <th class="py-3 px-4 text-left text-gray-700">Papel</th>
+                      <th class="py-3 px-4 text-center text-gray-700">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody v-if="participacoes && participacoes.length">
+                    <tr
+                      v-for="participacao in participacoes"
+                      :key="participacao.id"
+                      class="border-t"
+                    >
+                      <td class="py-3 px-4 text-gray-800">
+                        {{ participacao.nome }}
+                      </td>
+                      <td class="py-3 px-4 text-gray-600">
+                        {{ participacao.papel }}
+                      </td>
+                      <td class="py-3 px-4 flex justify-center space-x-4">
+                        <button
+                          @click="atualizarParticipacao(participacao.id)"
+                          class="text-blue-500 hover:text-blue-700"
+                          title="Atualizar"
+                        >
+                          <i class="fa fa-pencil"></i>
+                        </button>
+                        <button
+                          @click="deletarParticipacao(participacao.id)"
+                          class="text-red-500 hover:text-red-700"
+                          title="Deletar"
+                        >
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody v-else>
+                    <tr>
+                      <td
+                        colspan="3"
+                        class="py-3 px-4 text-gray-600 italic text-center"
+                      >
+                        Sem Participações
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div v-else class="text-center text-gray-600 italic">
+        Nenhum projeto encontrado.
       </div>
     </section>
   </main>
@@ -230,6 +262,8 @@ const participacoes = ref([]);
 const isLoading = ref(false);
 const errorMessage = ref(null);
 const successMessage = ref(null);
+
+//OBS: Buscar Participações
 
 const nivelExperiencia = ["BASICO", "INTERMEDIARIO", "AVANCADO"];
 
@@ -255,6 +289,7 @@ const buscarProjetos = async () => {
       `http://localhost:8080/projeto/estudante/${1}`
     );
     projetos.value = data;
+    await buscarParticipacoes()
   } catch (error) {
     console.error("Sem Projeto.", error);
   }
@@ -330,7 +365,7 @@ const sendNewPrticipant = async () => {
     setTimeout(() => {
       closeModalParticpacoes();
       cleanForm();
-      location.reload()
+      location.reload();
     }, 2000);
   }
 };
@@ -361,6 +396,5 @@ const cleanForm = () => {
 
 onMounted(() => {
   buscarProjetos();
-  buscarParticipacoes();
 });
 </script>

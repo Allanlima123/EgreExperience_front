@@ -1,6 +1,5 @@
 <template>
-  <div class="bg-gray-300 py-4 flex flex-col items-center justify-center">
-    <!-- Header Section -->
+  <div class="py-4 flex flex-col items-center justify-center">
     <div
       class="flex flex-wrap items-center justify-between px-4 space-x-3 pb-4 w-full max-w-screen-xl"
     >
@@ -26,7 +25,6 @@
       </div>
     </div>
 
-    <!-- Egressos List Section -->
     <div class="flex-grow py-4">
       <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-screen-xl w-full"
@@ -77,19 +75,6 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
-
-const dataEstudante = ref([]);
-
-const getTodosEstudantes = async () => {
-  try {
-    const response = await axios.get("http://localhost:8080/estudante");
-    dataEstudante.value = response.data;
-  } catch (error) {
-    console.error("Erro ao buscar dados dos estudantes:", error);
-  }
-};
-
-onMounted(getTodosEstudantes);
 </script>
 
 <style scoped>

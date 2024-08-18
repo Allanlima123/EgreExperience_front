@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div class="bg-gray-300 min-h-screen flex flex-col ">
     <HeaderMain class="bg-gray-800 p-4 flex justify-center">
       <div
         class="px-4 flex items-center justify-between max-w-screen-xl w-full"
@@ -16,7 +16,9 @@
         </button>
       </div>
     </HeaderMain>
-    <Card />
+
+    <ListaEgressos />
+
     <FooterMain class="bg-gray-800 p-4 left-0 right-0 flex justify-center">
       <div
         class="w-full px-6 flex items-center justify-between max-w-screen-xl"
@@ -42,7 +44,7 @@
 </template>
 
 <script setup>
-import Card from "@/views/egressos/Card";
+import ListaEgressos from "./ListaEgressos";
 import FooterMain from "../../components/FooterMain.vue";
 import HeaderMain from "@/components/HeaderMain.vue";
 </script>
