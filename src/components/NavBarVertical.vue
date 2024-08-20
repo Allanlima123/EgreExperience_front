@@ -99,7 +99,7 @@
                 <div
                   class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
                 >
-                  <i class="fa fa-cog text-white text-xl"></i>
+                  <i class="fa fa-user text-white text-xl"></i>
                   <transition name="text">
                     <span
                       v-if="!isCollapsed"

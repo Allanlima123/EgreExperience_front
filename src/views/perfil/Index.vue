@@ -27,23 +27,23 @@
         <div class="flex overflow-hidden">
           <div class="p-4 rounded-md mr-4">
             <div class="w-full flex items-center justify-center mb-3">
-              <div class="w-56">
+              <div class="w-56 h-56">
                 <img
-                  :src="dataUser.foto"
+                  :src="perfilUser.foto"
                   alt="foto Usuário"
-                  class="w-full h-full rounded-full"
+                  class="w-full h-full object-cover rounded-full"
                 />
               </div>
             </div>
             <div>
               <p class="text-gray-800 font-light text-md">
-                <strong>{{ dataUser.nome }}</strong>
+                <strong>{{ perfilUser.nome }}</strong>
               </p>
-              <!-- <p class="text-gray-800 font-light text-md">
-                <strong>{{ dataUser.perfil }}</strong>
-              </p> -->
               <p class="text-gray-800 font-light text-md">
-                <strong>{{ dataUser.cargoAtual }}</strong>
+                <strong>{{ emailUser }}</strong>
+              </p>
+              <p class="text-gray-800 font-light text-md">
+                <strong>{{ perfilUser.cargoAtual }}</strong>
               </p>
             </div>
           </div>
@@ -55,17 +55,20 @@
               </h3>
               <ul
                 class="text-gray-800 font-normal font-sans text-sm my-2"
-                v-if="dataUser.cursos && dataUser.cursos.length > 0"
+                v-if="formacoes.length > 0"
               >
                 <li>
-                  <strong>{{ dataUser.cursos[0].nome }}</strong>
+                  <strong>{{ formacoes[0].nome }}</strong> -
+                  {{ formacoes[0].universidade }}
                 </li>
               </ul>
               <span class="block" v-else>Sem Formação Academica</span>
-              <span
-                class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
-                >Ver Formações Acadêmicas!</span
-              >
+              <router-link to="/formacao">
+                <span
+                  class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
+                  >Ver Formações Acadêmicas!</span
+                >
+              </router-link>
             </div>
 
             <div class="section-divider"></div>
@@ -76,20 +79,21 @@
               </h3>
               <ul
                 class="text-gray-800 font-normal font-sans text-sm my-2"
-                v-if="dataUser.empregos && dataUser.empregos.length > 0"
+                v-if="experiencias.length > 0"
               >
                 <li>
-                  <strong>{{ dataUser.empregos[0].cargo }}</strong
-                  >,
-                  {{ dataUser.empregos[0].empresa }}
-                  ({{ dataUser.empregos[0].periodo }})
+                  <strong>{{ experiencias[0].cargo }}</strong> -
+                  {{ experiencias[0].empresa }}
                 </li>
               </ul>
               <span class="block" v-else>Sem Experiência Profissional</span>
-              <span
-                class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
-                >Ver Experiência Completa!</span
-              >
+
+              <router-link to="/experiencia">
+                <span
+                  class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
+                  >Ver Experiência Completa!</span
+                >
+              </router-link>
             </div>
             <div class="section-divider"></div>
 
@@ -97,39 +101,43 @@
               <h3 class="text-gray-800 text-2xl font-semibold">
                 Projeto Relevante
               </h3>
-              <ul
-                class="text-gray-800 my-2"
-                v-if="dataUser.projetos && dataUser.projetos.length > 0"
-              >
+              <ul class="text-gray-800 my-2" v-if="projetos.length">
                 <li>
-                  <strong>{{ dataUser.projetos[0].nome }}</strong> -
-                  <span>{{ dataUser.projetos[0].descricao }}</span>
+                  <strong>{{ projetos[0].nome }}</strong> -
+                  <span>{{ projetos[0].descricao }}</span>
                 </li>
               </ul>
               <span class="block" v-else>Sem Formação Academica</span>
-              <span
-                class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
-              >
-                Ver todos os Projetos!
-              </span>
+              <router-link to="/formacao">
+                <span
+                  class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
+                >
+                  Ver todos os Projetos!
+                </span>
+              </router-link>
             </div>
 
             <div class="section-divider"></div>
 
             <div>
-              <h3 class="text-gray-800 text-2xl font-semibold">Habilidades</h3>
+              <h3 class="text-gray-800 text-2xl font-semibold mb-4">
+                Habilidades
+              </h3>
               <ul
-                class="text-gray-800 my-2 flex flex-wrap space-x-3"
-                v-if="dataUser.habilidades && dataUser.habilidades.length > 0">
+                class="text-gray-800 my-2 flex flex-wrap gap-2"
+                v-if="habilidades.length"
+              >
                 <li
-                  v-for="habilidade in dataUser.habilidades"
-                  :key="habilidade"
-                  class="text-sm"
+                  v-for="habilidade in habilidades"
+                  :key="habilidade.nome"
+                  class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm font-medium"
                 >
-                  {{ habilidade }}
+                  {{ habilidade.nome }}
                 </li>
               </ul>
-              <span class="block" v-else>Sem Habilidades Técnicas</span>
+              <span class="block text-gray-600 italic" v-else
+                >Sem Habilidades Técnicas</span
+              >
             </div>
 
             <!--
@@ -150,7 +158,7 @@
               <h3 class="text-gray-800 text-2xl font-semibold">Idiomas</h3>
               <ul class="text-gray-800 my-2 flex flex-wrap space-x-3">
                 <li
-                  v-for="languagens in dataUser.idiomas"
+                  v-for="languagens in perfilUser.idiomas"
                   :key="languagens"
                   class="text-sm"
                 >
@@ -167,25 +175,51 @@
     <Footer />
   </div>
 </template>
-
 <script setup>
 import NavBar from "../perfil/Navbar.vue";
 import Footer from "../perfil/Footer.vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-const dataUser = ref([]);
+const perfilUser = ref({});
+const emailUser = ref("");
+const formacoes = ref([]);
+const experiencias = ref([]);
+const projetos = ref([]);
+const habilidades = ref([]);
+
+const estudanteId = 1;
+
+const fetchData = async (endpoint, refValue, errorMessage) => {
+  try {
+    const { data } = await axios.get(
+      `http://localhost:8080/${endpoint}/estudante/${estudanteId}`
+    );
+    refValue.value = data;
+  } catch (error) {
+    console.error(errorMessage, error);
+  }
+};
 
 const getDataEstudante = async () => {
   try {
-    const response = await axios.get(`http://localhost:8080/estudante/${1}`);
-    dataUser.value = response.data;
-    console.log(response);
+    const { data } = await axios.get(
+      `http://localhost:8080/estudante/${estudanteId}`
+    );
+    perfilUser.value = data;
+    emailUser.value = data.perfil?.email || "";
   } catch (error) {
     console.error("Erro ao buscar dados do estudante:", error);
   }
 };
-onMounted(getDataEstudante);
+
+onMounted(() => {
+  getDataEstudante();
+  fetchData("curso", formacoes, "Erro ao buscar dados das formações:");
+  fetchData("emprego", experiencias, "Erro ao buscar dados das experiências:");
+  fetchData("projeto", projetos, "Erro ao buscar dados dos projetos:");
+  fetchData("habilidade", habilidades, "Erro ao buscar dados das habilidades:");
+});
 </script>
 
 <style scoped>

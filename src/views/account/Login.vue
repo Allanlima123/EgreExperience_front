@@ -39,7 +39,7 @@
           Ou
         </div>
 
-        <form @submit.prevent="userLogin">
+        <form @submit.prevent="login">
           <div class="mb-4">
             <label class="block text-sm font-bold mb-2 text-white" for="email"
               >E-mail</label
@@ -48,7 +48,7 @@
               class="shadow appearance-none border-b-2 w-full py-2 pl-0 text-white leading-tight focus:outline-none focus:shadow-outline bg-transparent"
               id="email"
               type="text"
-              v-model="dataUser.username"
+              v-model="dataUser.email"
               placeholder="Seu Email"
               required
             />
@@ -92,19 +92,22 @@
 <script setup>
 import axios from 'axios';
 import { reactive } from 'vue';
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter();
 
 const dataUser = reactive({
-  username: "",
+  email: "",
   password: ""
 })
 
-const userLogin = async () =>{
-  console.log(dataUser);
-  
-  const response = await axios.post("http://localhost:8080/perfil", (dataUser))
-
-  //console.log(response)
-
+const login = async () =>{
+  try {
+    const { data } = await axios.post("http://localhost:8080/perfil", (dataUser))
+    console.log(`Perfil com o ${data.id} criado com Sucesso.`)
+  } catch (error) {
+    console.error("Sem Participações.", error);
+  }
 }
 </script>
 
