@@ -108,17 +108,17 @@ const routes = [
       title: "egressos",
       authRequired: false,
     },
-    component: () => import("../views/egressos/index.vue"),
+    component: () => import("../views/egressos/estudante/index.vue"),
   },
   //Egressos
   {
-    path: "/egressos/list",
-    name: "list",
+    path: "/egressos/lista",
+    name: "lista",
     meta: {
-      title: "list",
+      title: "lista",
       authRequired: false,
     },
-    component: () => import("../views/egressos/ListaEgressos.vue"),
+    component: () => import("../views/egressos/admin/index.vue"),
   },
 
   //Experiencia

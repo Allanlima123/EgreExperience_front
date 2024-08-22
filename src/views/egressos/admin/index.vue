@@ -17,7 +17,7 @@
       </div>
     </HeaderMain>
 
-    <Card />
+    <ListaEgressos />
 
     <FooterMain class="bg-gray-800 p-4 left-0 right-0 flex justify-center">
       <div
@@ -44,10 +44,9 @@
 </template>
 
 <script setup>
-// import ListaEgressos from "./ListaEgressos";
-import FooterMain from "../../components/FooterMain.vue";
-import HeaderMain from "@/components/HeaderMain.vue";
-import Card from "./Card.vue";
+import ListaEgressos from "./ListaEgressos";
+import FooterMain from "../../../components/FooterMain.vue";
+import HeaderMain from "../../../components/HeaderMain.vue";
 </script>
 
 <style scoped></style>
