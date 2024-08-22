@@ -36,6 +36,7 @@
                   id="nome"
                   type="text"
                   v-model="formData.nome"
+                  placeholder="Ex.:Ana"
                   class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   required
                 />
@@ -48,6 +49,7 @@
                 <input
                   id="cargoAtual"
                   type="text"
+                  placeholder="Ex.: Desenvolvedor"
                   v-model="formData.cargoAtual"
                   required
                   class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
@@ -114,7 +116,7 @@
                 for="descricao"
                 class="block text-sm font-medium text-gray-700"
               >
-                Descrição
+                Descrição Técnica
               </label>
               <textarea
                 v-model="formData.descricaoTecnica"
