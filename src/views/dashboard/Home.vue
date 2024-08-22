@@ -116,7 +116,7 @@
                 for="descricao"
                 class="block text-sm font-medium text-gray-700"
               >
-                Descrição Técnica
+                Descrição Técnica Geral
               </label>
               <textarea
                 v-model="formData.descricaoTecnica"
