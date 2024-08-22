@@ -27,7 +27,7 @@
           v-if="isVisibleForm"
           class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto"
         >
-          <h2 class="text-2xl font-bold mb-4">Formulário de Dados</h2>
+          <h2 class="text-2xl font-bold mb-4">Formulário Estudante</h2>
           <form @submit.prevent="handleSubmit">
             <div class="flex gap-2">
               <div class="mb-4 w-full">
@@ -55,29 +55,31 @@
               </div>
             </div>
 
-            <div class="mb-4 w-full">
-              <label for="foto" class="block text-gray-700">Foto</label>
-              <input
-                id="foto"
-                type="text"
-                placeholder="Link de uma Imagem"
-                v-model="formData.foto"
-                required
-                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-              />
-            </div>
+            <div class="flex gap-2">
+              <div class="mb-4 w-full">
+                <label for="foto" class="block text-gray-700">Foto</label>
+                <input
+                  id="foto"
+                  type="text"
+                  placeholder="Link de uma Imagem"
+                  v-model="formData.foto"
+                  required
+                  class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                />
+              </div>
 
-            <div class="mb-4">
-              <label for="anoFormacao" class="block text-gray-700"
-                >Ano de Formação</label
-              >
-              <input
-                id="anoFormacao"
-                type="date"
-                v-model="dataObservation"
-                required
-                class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-              />
+              <div class="mb-4">
+                <label for="anoFormacao" class="block text-gray-700"
+                  >Ano de Formação</label
+                >
+                <input
+                  id="anoFormacao"
+                  type="date"
+                  v-model="dataObservation"
+                  required
+                  class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                />
+              </div>
             </div>
 
             <div class="mb-6">
@@ -95,16 +97,32 @@
                     :id="`idioma-${index}`"
                     :value="idioma"
                     v-model="formData.idiomas"
-                    class="h-4 w-4 cursor-pointer text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    class="h-3 w-3 cursor-pointer text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
                   <label
                     :for="`idioma-${index}`"
-                    class="ml-2 text-gray-700 text-sm"
+                    class="ml-2 text-gray-700 text-xs"
                   >
                     {{ idioma }}
                   </label>
                 </div>
               </div>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="descricao"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Descrição
+              </label>
+              <textarea
+                v-model="formData.descricaoTecnica"
+                id="descricao"
+                rows="4"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
+              ></textarea>
             </div>
 
             <button
@@ -220,6 +238,7 @@ const formData = reactive({
   foto: "",
   nome: "",
   cargoAtual: "",
+  descricaoTecnica: "",
   idiomas: [],
   perfilId: 0,
 });

@@ -26,14 +26,12 @@
 
         <div class="flex overflow-hidden">
           <div class="p-4 rounded-md mr-4">
-            <div class="w-full flex items-center justify-center mb-3">
-              <div class="w-56 h-56">
-                <img
-                  :src="perfilUser.foto"
-                  alt="foto Usuário"
-                  class="w-full h-full object-cover rounded-full"
-                />
-              </div>
+            <div class="w-56 h-56 flex items-center justify-center mb-3">
+              <img
+                :src="perfilUser.foto"
+                alt="foto Usuário"
+                class="w-full h-full object-cover rounded-full"
+              />
             </div>
             <div>
               <p class="text-gray-800 font-light text-md">
