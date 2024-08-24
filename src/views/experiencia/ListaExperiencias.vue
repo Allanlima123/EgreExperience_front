@@ -314,6 +314,7 @@ const editarExperiencia = async (idExperiencia) => {
 const deletarExperiencia = async (idExperiencia) => {
   try {
     await axios.delete(`http://localhost:8080/emprego/${idExperiencia}`);
+    fetchExperiencias();
   } catch (error) {
     console.error("Erro ao deletar curso.", error);
   }
