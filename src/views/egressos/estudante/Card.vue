@@ -50,11 +50,21 @@
             </p>
 
             <div class="flex flex-wrap mb-4">
-              <span
-                class="text-center bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
+              <ul
+                class="text-gray-800 my-2 flex flex-wrap gap-2"
+                v-if="estudante.habilidades"
               >
-                {{ estudante.nome }}
-              </span>
+                <li
+                  v-for="habilidade in estudante.habilidades"
+                  :key="habilidade"
+                  class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs"
+                >
+                  {{ habilidade }}
+                </li>
+              </ul>
+              <span class="block text-gray-600 italic" v-else
+                >Sem Habilidades Técnicas</span
+              >
             </div>
           </div>
           <router-link

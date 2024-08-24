@@ -85,19 +85,16 @@
               {{ estudante.cargoAtual }}
             </td>
             <td
-              class="scroll_style items-center flex mb-2 px-6 py-4 text-justify text-sm text-gray-500 overflow-y-auto w-80 max-w-80"
+              class="scroll_box items-center flex mb-2 px-6 py-4 text-justify text-sm text-gray-500 overflow-y-auto w-80 max-w-80"
             >
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim
-              omnis nostrum itaque cum delectus incidunt odit, facere ducimus
-              adipisci, sed mollitia dicta numquam officiis corrupti, aut
-              necessitatibus aperiam commodi harum!
+              {{ estudante.descricaoTecnica }}
             </td>
             <td class="px-6 py-4 text-sm text-gray-500">
               {{ formatDate(estudante.anoFormacao) }}
             </td>
             <td class="px-6 py-4 text-sm text-gray-500">
               <ul
-                class="list-disc list-inside block scroll_style px-6 py-4 text-sm text-gray-500 overflow-y-auto h-20"
+                class="list-none list-inside block px-6 py-4 text-sm text-gray-500 overflow-y-auto h-20 scroll_box"
               >
                 <li v-for="idioma in estudante.idiomas" :key="idioma">
                   {{ idioma }}
@@ -160,7 +157,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* .scroll_style{
-
-} */
+.scroll_box::-webkit-scrollbar {
+  width: 0.2rem;
+}
 </style>

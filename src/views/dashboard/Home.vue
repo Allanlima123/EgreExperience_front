@@ -31,7 +31,7 @@
           <form @submit.prevent="handleSubmit">
             <div class="flex gap-2">
               <div class="mb-4 w-full">
-                <label for="nome" class="block text-gray-700">Nome</label>
+                <label for="nome" class="block text-sm mb-2 font-sm text-gray-700">Nome</label>
                 <input
                   id="nome"
                   type="text"
@@ -43,7 +43,7 @@
               </div>
 
               <div class="mb-4 w-full">
-                <label for="cargoAtual" class="block text-gray-700"
+                <label for="cargoAtual" class="block text-sm mb-2 font-sm text-gray-700"
                   >Cargo Atual</label
                 >
                 <input
@@ -59,7 +59,7 @@
 
             <div class="flex gap-2">
               <div class="mb-4 w-full">
-                <label for="foto" class="block text-gray-700">Foto</label>
+                <label for="foto" class="block text-sm mb-2 font-sm text-gray-700">Foto</label>
                 <input
                   id="foto"
                   type="text"
@@ -71,7 +71,7 @@
               </div>
 
               <div class="mb-4">
-                <label for="anoFormacao" class="block text-gray-700"
+                <label for="anoFormacao" class="block text-sm mb-2 font-sm text-gray-700"
                   >Ano de Formação</label
                 >
                 <input
@@ -84,43 +84,65 @@
               </div>
             </div>
 
-            <div class="mb-6">
-              <label class="block text-lg font-semibold text-gray-800 mb-2"
-                >Idiomas</label
-              >
-              <div class="flex flex-wrap gap-4">
-                <div
-                  v-for="(idioma, index) in idiomas"
-                  :key="index"
-                  class="flex items-center"
+            <div class="flex space-x-4">
+              <div class="flex flex-col w-1/2">
+                <label for="idiomas" class="block mb-2 text-sm font-sm text-gray-700"
+                  >Selecione seus Idiomas:</label
                 >
-                  <input
-                    type="checkbox"
-                    :id="`idioma-${index}`"
+                <select
+                  id="idiomas"
+                  v-model="formData.idiomas"
+                  multiple
+                  class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 scroll_box"
+                  required
+                >
+                  <option
+                    v-for="idioma in listaIdiomas"
+                    :key="idioma"
                     :value="idioma"
-                    v-model="formData.idiomas"
-                    class="h-3 w-3 cursor-pointer text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label
-                    :for="`idioma-${index}`"
-                    class="ml-2 text-gray-700 text-xs"
+                    class="text-sm"
                   >
                     {{ idioma }}
-                  </label>
-                </div>
+                  </option>
+                </select>
+              </div>
+
+              <div class="flex flex-col w-1/2">
+                <label
+                  for="habilidades"
+                  class="block text-sm mb-2 font-sm text-gray-700"
+                  >Selecione suas habilidades:</label
+                >
+                <select
+                  id="habilidades"
+                  v-model="formData.habilidades"
+                  multiple
+                  class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 scroll_box"
+                  required
+                >
+                  <option
+                    v-for="habilidade in listaHabilidades"
+                    :key="habilidade"
+                    :value="habilidade"
+                    class="text-sm"
+                  >
+                    {{ habilidade }}
+                  </option>
+                </select>
               </div>
             </div>
 
-            <div class="mb-4">
+            <div class="my-4">
               <label
                 for="descricao"
-                class="block text-sm font-medium text-gray-700"
+                class="block text-sm font-sm text-gray-700"
               >
                 Descrição Técnica Geral
               </label>
               <textarea
                 v-model="formData.descricaoTecnica"
                 id="descricao"
+                maxlength="100"
                 rows="4"
                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
@@ -215,7 +237,7 @@ import axios from "axios";
 
 const isVisible = ref(false);
 const isVisibleForm = ref(false);
-const idiomas = [
+const listaIdiomas = [
   "INGLES",
   "ESPANHOL",
   "PORTUGUES",
@@ -233,6 +255,40 @@ const idiomas = [
   "POLONES",
 ];
 
+const listaHabilidades = [
+  "PROGRAMACAO_JAVA",
+  "DESENVOLVIMENTO_WEB",
+  "ANALISE_DE_DADOS",
+  "SEGURANCA_CIBERNETICA",
+  "ADMINISTRACAO_BANCO_DE_DADOS",
+  "INTELIGENCIA_ARTIFICIAL",
+  "DESIGN_GRAFICO",
+  "UX_UI",
+  "FOTOGRAFIA",
+  "ANIMACAO_2D_3D",
+  "DESIGN_DE_INTERIORES",
+  "ENGENHARIA_CIVIL",
+  "ENGENHARIA_ELETRICA",
+  "ENGENHARIA_MECANICA",
+  "ENGENHARIA_DE_SOFTWARE",
+  "GESTAO_DE_PROJETOS",
+  "ENFERMAGEM",
+  "FISIOTERAPIA",
+  "NUTRICAO",
+  "MEDICINA",
+  "FARMACIA",
+  "CONTABILIDADE",
+  "GESTAO_DE_RECURSOS_HUMANOS",
+  "MARKETING_DIGITAL",
+  "PLANEJAMENTO_ESTRATEGICO",
+  "FINANCAS_CORPORATIVAS",
+  "DOCENCIA",
+  "ORIENTACAO_PEDAGOGICA",
+  "DESENVOLVIMENTO_CURRICULAR",
+  "PSICOPEDAGOGIA",
+  "COORDENACAO_ESCOLAR",
+];
+
 const dataObservation = ref("");
 
 const formData = reactive({
@@ -242,6 +298,7 @@ const formData = reactive({
   cargoAtual: "",
   descricaoTecnica: "",
   idiomas: [],
+  habilidades: [],
   perfilId: 0,
 });
 
@@ -303,7 +360,6 @@ const closePopup = () => {
   isVisibleForm.value = false;
 };
 
-// Lifecycle Hook
 onMounted(() => {
   checkPopupVisibility();
   fetchPerfil();

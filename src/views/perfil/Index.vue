@@ -105,7 +105,7 @@
                   <span>{{ projetos[0].descricao }}</span>
                 </li>
               </ul>
-              <span class="block" v-else>Sem Formação Academica</span>
+              <span class="block" v-else>Sem Projetos relevenates!</span>
               <router-link to="/formacao">
                 <span
                   class="cursor-pointer text-gray-800 font-medium text-sm font-sans hover:border-b border-gray-800"
@@ -121,48 +121,39 @@
               <h3 class="text-gray-800 text-2xl font-semibold mb-4">
                 Habilidades
               </h3>
+
               <ul
                 class="text-gray-800 my-2 flex flex-wrap gap-2"
-                v-if="habilidades.length"
+                v-if="perfilUser.habilidades"
               >
                 <li
-                  v-for="habilidade in habilidades"
-                  :key="habilidade.nome"
-                  class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm font-medium"
+                  v-for="habilidade in perfilUser.habilidades"
+                  :key="habilidade"
+                  class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm"
                 >
-                  {{ habilidade.nome }}
+                  {{ habilidade }}
                 </li>
               </ul>
-              <span class="block text-gray-600 italic" v-else
-                >Sem Habilidades Técnicas</span
-              >
+              <span class="block text-gray-600 italic" v-else>Sem Habilidades Técnicas</span>
             </div>
-
-            <!--
-            <div class="section-divider"></div>
-            
-            - <div>
-              <h3 class="text-gray-800 text-2xl font-semibold">
-                Descrição Profissional
-              </h3>
-              <p class="text-gray-800 my-2">
-                {{ dataUser.professionalDescription }}
-              </p>
-            </div> -->
 
             <div class="section-divider"></div>
 
             <div>
               <h3 class="text-gray-800 text-2xl font-semibold">Idiomas</h3>
-              <ul class="text-gray-800 my-2 flex flex-wrap space-x-3">
+              <ul
+                class="text-gray-800 my-2 flex flex-wrap space-x-3"
+                v-if="perfilUser.habilidades"
+              >
                 <li
                   v-for="languagens in perfilUser.idiomas"
                   :key="languagens"
-                  class="text-sm"
+                  class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm"
                 >
                   {{ languagens }}
                 </li>
               </ul>
+              <span class="block text-gray-600 italic" v-else>Sem Idiomas</span>
             </div>
 
             <div class="section-divider"></div>
@@ -184,7 +175,6 @@ const emailUser = ref("");
 const formacoes = ref([]);
 const experiencias = ref([]);
 const projetos = ref([]);
-const habilidades = ref([]);
 
 const estudanteId = 1;
 
@@ -216,7 +206,6 @@ onMounted(() => {
   fetchData("curso", formacoes, "Erro ao buscar dados das formações:");
   fetchData("emprego", experiencias, "Erro ao buscar dados das experiências:");
   fetchData("projeto", projetos, "Erro ao buscar dados dos projetos:");
-  fetchData("habilidade", habilidades, "Erro ao buscar dados das habilidades:");
 });
 </script>
 
