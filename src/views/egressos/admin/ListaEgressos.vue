@@ -54,10 +54,16 @@
             >
               Ano de Formação
             </th>
+
             <th
               class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider"
             >
               Idiomas
+            </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider"
+            >
+              Habilidades
             </th>
             <th
               class="px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider"
@@ -75,10 +81,10 @@
             :key="estudante.id"
             class="hover:bg-gray-50"
           >
-            <td class="px-6 py-4 text-sm font-medium text-gray-900">
+            <td class="px-6 py-4 text-sm font-medium text-gray-500">
               {{ estudante.id }}
             </td>
-            <td class="px-6 py-4 text-sm text-gray-900">
+            <td class="px-6 py-4 text-sm text-gray-500">
               {{ estudante.nome }}
             </td>
             <td class="px-6 py-4 text-sm text-gray-500">
@@ -89,15 +95,27 @@
             >
               {{ estudante.descricaoTecnica }}
             </td>
-            <td class="px-6 py-4 text-sm text-gray-500">
+            <td class="px-6 py-4 text-sm text-gray-500 w-30">
               {{ formatDate(estudante.anoFormacao) }}
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-500">
+              <ul
+                class="list-none list-inside w-25 block px-4 py-4 text-sm text-gray-500 overflow-y-auto h-20 scroll_box"
+              >
+                <li v-for="idioma in estudante.idiomas" :key="idioma">
+                  {{ idioma }}
+                </li>
+              </ul>
             </td>
             <td class="px-6 py-4 text-sm text-gray-500">
               <ul
                 class="list-none list-inside block px-6 py-4 text-sm text-gray-500 overflow-y-auto h-20 scroll_box"
               >
-                <li v-for="idioma in estudante.idiomas" :key="idioma">
-                  {{ idioma }}
+                <li
+                  v-for="habilidade in estudante.habilidades"
+                  :key="habilidade"
+                >
+                  {{ habilidade }}
                 </li>
               </ul>
             </td>

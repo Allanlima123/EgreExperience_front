@@ -95,7 +95,7 @@
               </router-link>
             </div>
             <div>
-              <router-link :to='`/perfil/${username}`'>
+              <router-link :to="{ name: 'perfil', params: { username, id: userId } }">
                 <div
                   class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
                 >
@@ -104,8 +104,9 @@
                     <span
                       v-if="!isCollapsed"
                       class="ml-2 text-white transition-opacity duration-500 ease-linear"
-                      >Perfil</span
                     >
+                      Perfil
+                    </span>
                   </transition>
                 </div>
               </router-link>
@@ -134,10 +135,16 @@
 
 <script setup>
 import { ref } from "vue";
+import { useEstudanteStore } from "../store/Estudante.js";
 
 const isCollapsed = ref(false);
 
-const username = localStorage.getItem('username') || 'allan lima';
+const estudante = useEstudanteStore()
+
+const username = "alan"; 
+const userId =  1;
+
+// const username = localStorage.getItem("username") || [];
 
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;

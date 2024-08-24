@@ -134,7 +134,9 @@
                   {{ habilidade }}
                 </li>
               </ul>
-              <span class="block text-gray-600 italic" v-else>Sem Habilidades Técnicas</span>
+              <span class="block text-gray-600 italic" v-else
+                >Sem Habilidades Técnicas</span
+              >
             </div>
 
             <div class="section-divider"></div>
@@ -164,11 +166,15 @@
     <Footer />
   </div>
 </template>
+
 <script setup>
 import NavBar from "../perfil/Navbar.vue";
 import Footer from "../perfil/Footer.vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
+
+const { params } = useRoute();
 
 const perfilUser = ref({});
 const emailUser = ref("");
@@ -176,23 +182,21 @@ const formacoes = ref([]);
 const experiencias = ref([]);
 const projetos = ref([]);
 
-const estudanteId = 1;
-
 const fetchData = async (endpoint, refValue, errorMessage) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:8080/${endpoint}/estudante/${estudanteId}`
+      `http://localhost:8080/${endpoint}/estudante/${params.id}`
     );
     refValue.value = data;
   } catch (error) {
-    console.error(errorMessage, error);
+    console.error(`${errorMessage}:`, error);
   }
 };
 
 const getDataEstudante = async () => {
   try {
     const { data } = await axios.get(
-      `http://localhost:8080/estudante/${estudanteId}`
+      `http://localhost:8080/estudante/${params.id}`
     );
     perfilUser.value = data;
     emailUser.value = data.perfil?.email || "";
@@ -203,9 +207,9 @@ const getDataEstudante = async () => {
 
 onMounted(() => {
   getDataEstudante();
-  fetchData("curso", formacoes, "Erro ao buscar dados das formações:");
-  fetchData("emprego", experiencias, "Erro ao buscar dados das experiências:");
-  fetchData("projeto", projetos, "Erro ao buscar dados dos projetos:");
+  fetchData("curso", formacoes, "Erro ao buscar dados das formações");
+  fetchData("emprego", experiencias, "Erro ao buscar dados das experiências");
+  fetchData("projeto", projetos, "Erro ao buscar dados dos projetos");
 });
 </script>
 

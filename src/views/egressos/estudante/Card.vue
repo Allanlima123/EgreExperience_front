@@ -70,7 +70,7 @@
           <router-link
             :to="{
               name: 'perfil',
-              params: { username: estudante.nome },
+              params: { username: estudante.nome, id : estudante.id },
             }"
             class="w-full mt-4"
           >

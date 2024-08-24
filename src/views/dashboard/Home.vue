@@ -12,7 +12,7 @@
         >
           <h2 class="text-xl font-bold mb-4">Bem-vindo(a) de volta!</h2>
           <p class="mb-4">
-            Olá {{ "Allan" }}! Estamos felizes em tê-lo(a) conosco novamente.
+            Olá {{ nomePerfil.toLowerCase() }}! Estamos felizes em tê-lo(a) conosco novamente.
             Antes de prosseguir, precisamos fazer algumas perguntas.
           </p>
           <button
@@ -25,17 +25,21 @@
 
         <div
           v-if="isVisibleForm"
-          class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto"
+          class="bg-white p-6 rounded-lg shadow-lg w-2/5 max-w-2xl mx-auto"
         >
           <h2 class="text-2xl font-bold mb-4">Formulário Estudante</h2>
           <form @submit.prevent="handleSubmit">
             <div class="flex gap-2">
               <div class="mb-4 w-full">
-                <label for="nome" class="block text-sm mb-2 font-sm text-gray-700">Nome</label>
+                <label
+                  for="nome"
+                  class="block text-sm mb-2 font-sm text-gray-700"
+                  >Nome</label
+                >
                 <input
                   id="nome"
                   type="text"
-                  v-model="formData.nome"
+                  v-model="estudanteStore.nome"
                   placeholder="Ex.:Ana"
                   class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                   required
@@ -43,14 +47,16 @@
               </div>
 
               <div class="mb-4 w-full">
-                <label for="cargoAtual" class="block text-sm mb-2 font-sm text-gray-700"
+                <label
+                  for="cargoAtual"
+                  class="block text-sm mb-2 font-sm text-gray-700"
                   >Cargo Atual</label
                 >
                 <input
                   id="cargoAtual"
                   type="text"
                   placeholder="Ex.: Desenvolvedor"
-                  v-model="formData.cargoAtual"
+                  v-model="estudanteStore.cargoAtual"
                   required
                   class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                 />
@@ -59,19 +65,25 @@
 
             <div class="flex gap-2">
               <div class="mb-4 w-full">
-                <label for="foto" class="block text-sm mb-2 font-sm text-gray-700">Foto</label>
+                <label
+                  for="foto"
+                  class="block text-sm mb-2 font-sm text-gray-700"
+                  >Foto</label
+                >
                 <input
                   id="foto"
                   type="text"
                   placeholder="Link de uma Imagem"
-                  v-model="formData.foto"
+                  v-model="estudanteStore.foto"
                   required
                   class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
                 />
               </div>
 
               <div class="mb-4">
-                <label for="anoFormacao" class="block text-sm mb-2 font-sm text-gray-700"
+                <label
+                  for="anoFormacao"
+                  class="block text-sm mb-2 font-sm text-gray-700"
                   >Ano de Formação</label
                 >
                 <input
@@ -86,12 +98,14 @@
 
             <div class="flex space-x-4">
               <div class="flex flex-col w-1/2">
-                <label for="idiomas" class="block mb-2 text-sm font-sm text-gray-700"
+                <label
+                  for="idiomas"
+                  class="block mb-2 text-sm font-sm text-gray-700"
                   >Selecione seus Idiomas:</label
                 >
                 <select
                   id="idiomas"
-                  v-model="formData.idiomas"
+                  v-model="estudanteStore.idiomas"
                   multiple
                   class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 scroll_box"
                   required
@@ -115,7 +129,7 @@
                 >
                 <select
                   id="habilidades"
-                  v-model="formData.habilidades"
+                  v-model="estudanteStore.habilidades"
                   multiple
                   class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 scroll_box"
                   required
@@ -140,7 +154,7 @@
                 Descrição Técnica Geral
               </label>
               <textarea
-                v-model="formData.descricaoTecnica"
+                v-model="useEstudanteStore.descricaoTecnica"
                 id="descricao"
                 maxlength="100"
                 rows="4"
@@ -232,82 +246,28 @@
 
 <script setup>
 import NavBarVertical from "@/components/NavBarVertical.vue";
-import { ref, reactive, onMounted, watch } from "vue";
+import { ref, onMounted, watch } from "vue";
 import axios from "axios";
+
+import { useEstudanteStore } from "../../store/Estudante.js";
+import { listaHabilidades, listaIdiomas } from "@/utils/data.js";
+
+const estudanteStore = useEstudanteStore();
 
 const isVisible = ref(false);
 const isVisibleForm = ref(false);
-const listaIdiomas = [
-  "INGLES",
-  "ESPANHOL",
-  "PORTUGUES",
-  "FRANCES",
-  "ALEMAO",
-  "ITALIANO",
-  "CHINES",
-  "JAPONES",
-  "RUSSO",
-  "ARABE",
-  "HINDI",
-  "COREANO",
-  "TURCO",
-  "HOLANDES",
-  "POLONES",
-];
 
-const listaHabilidades = [
-  "PROGRAMACAO_JAVA",
-  "DESENVOLVIMENTO_WEB",
-  "ANALISE_DE_DADOS",
-  "SEGURANCA_CIBERNETICA",
-  "ADMINISTRACAO_BANCO_DE_DADOS",
-  "INTELIGENCIA_ARTIFICIAL",
-  "DESIGN_GRAFICO",
-  "UX_UI",
-  "FOTOGRAFIA",
-  "ANIMACAO_2D_3D",
-  "DESIGN_DE_INTERIORES",
-  "ENGENHARIA_CIVIL",
-  "ENGENHARIA_ELETRICA",
-  "ENGENHARIA_MECANICA",
-  "ENGENHARIA_DE_SOFTWARE",
-  "GESTAO_DE_PROJETOS",
-  "ENFERMAGEM",
-  "FISIOTERAPIA",
-  "NUTRICAO",
-  "MEDICINA",
-  "FARMACIA",
-  "CONTABILIDADE",
-  "GESTAO_DE_RECURSOS_HUMANOS",
-  "MARKETING_DIGITAL",
-  "PLANEJAMENTO_ESTRATEGICO",
-  "FINANCAS_CORPORATIVAS",
-  "DOCENCIA",
-  "ORIENTACAO_PEDAGOGICA",
-  "DESENVOLVIMENTO_CURRICULAR",
-  "PSICOPEDAGOGIA",
-  "COORDENACAO_ESCOLAR",
-];
-
+const nomePerfil = ref("")
 const dataObservation = ref("");
 
-const formData = reactive({
-  anoFormacao: "",
-  foto: "",
-  nome: "",
-  cargoAtual: "",
-  descricaoTecnica: "",
-  idiomas: [],
-  habilidades: [],
-  perfilId: 0,
-});
-
+//GET PERFIL
 const fetchPerfil = async (idPerfil = 1) => {
   try {
     const { data } = await axios.get(
       `http://localhost:8080/perfil/${idPerfil}`
     );
-    formData.perfilId = data.id;
+    nomePerfil.value = data.nome
+    estudanteStore.setPerfilId(data.id);
   } catch (error) {
     console.error("Erro ao buscar perfil:", error);
   }
@@ -321,24 +281,14 @@ const checkPopupVisibility = () => {
   }
 };
 
-const openFormModal = () => {
-  isVisible.value = false;
-  isVisibleForm.value = true;
-
-  try {
-    localStorage.setItem("popupShown", "true");
-  } catch (error) {
-    console.error("Erro ao definir o item no localStorage:", error);
-  }
-};
-
+//POST ESTUDANTE
 const handleSubmit = async () => {
   isVisibleForm.value = false;
 
   try {
     const response = await axios.post(
       `http://localhost:8080/estudante`,
-      formData
+      estudanteStore.$state
     );
     console.log("Estudante enviado com sucesso:", response.data);
   } catch (error) {
@@ -353,8 +303,19 @@ const formatDate = (dateString) => {
 };
 
 watch(dataObservation, (newValue) => {
-  formData.anoFormacao = formatDate(newValue);
+  estudanteStore.anoFormacao = formatDate(newValue);
 });
+
+const openFormModal = () => {
+  isVisible.value = false;
+  isVisibleForm.value = true;
+
+  try {
+    localStorage.setItem("popupShown", "true");
+  } catch (error) {
+    console.error("Erro ao definir o item no localStorage:", error);
+  }
+};
 
 const closePopup = () => {
   isVisibleForm.value = false;

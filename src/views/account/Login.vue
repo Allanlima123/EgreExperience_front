@@ -94,21 +94,12 @@ import axios from 'axios';
 import { reactive } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 
-const router = useRouter();
-
 const dataUser = reactive({
   email: "",
   password: ""
 })
 
-const login = async () =>{
-  try {
-    const { data } = await axios.post("http://localhost:8080/perfil", (dataUser))
-    console.log(`Perfil com o ${data.id} criado com Sucesso.`)
-  } catch (error) {
-    console.error("Sem Participações.", error);
-  }
-}
+
 </script>
 
 <style scoped></style>

@@ -356,16 +356,18 @@ const fetchProjetos = async () => {
       `http://localhost:8080/projeto/estudante/${formProjeto.estudanteId}`
     );
     projetos.value = data;
-    await fetchParticipacoes();
+    console.log(data[0].id)
+    
+    await fetchParticipacoes(1);
   } catch (error) {
     console.error("Sem Projeto.", error);
   }
 };
 
-const fetchParticipacoes = async () => {
+const fetchParticipacoes = async (idProjeto) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:8080/participacoes`
+      `http://localhost:8080/participacoes/projeto/${idProjeto}`
     );
     participacoes.value = data;
   } catch (error) {
@@ -431,10 +433,10 @@ const sendNewParticipante = async () => {
   }
 };
 
-const deletarProjeto = async (idPorjeto) => {
+const deletarProjeto = async (idProjeto) => {
   try {
     const res = await axios.delete(
-      `http://localhost:8080/projeto/${idPorjeto}`
+      `http://localhost:8080/projeto/${idProjeto}`
     );
     location.reload();
     console.log(`Projeto ${res.status} deletado com sucesso.`);
