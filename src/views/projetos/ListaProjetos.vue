@@ -78,7 +78,10 @@
             <strong>Cidade Atual:</strong> {{ projeto.cidadeAtual }}
           </p>
 
-          <ListaParticipacoes :participacoes="participacoes"/>
+          <ListaParticipacoes
+            :participacoes="projeto.participacoes"
+            @editarParticipacao="editarParticipacao"
+          />
         </div>
       </div>
       <div v-else class="text-center text-gray-600 italic">
@@ -313,7 +316,6 @@ import ListaParticipacoes from "./ListaParticipacoes.vue";
 const isEditMode = ref(false);
 const showModal = ref(false);
 const projetos = ref([]);
-const participacoes = ref([]);
 
 const showModalParticipacao = ref(false);
 const isEditModeParticipacao = ref(false);
@@ -352,26 +354,29 @@ const fetchEstudante = async () => {
 
 const fetchProjetos = async () => {
   try {
-    const { data } = await axios.get(
+    const { data: projetosData } = await axios.get(
       `http://localhost:8080/projeto/estudante/${formProjeto.estudanteId}`
     );
-    projetos.value = data;
-    console.log(data[0].id)
-    
-    await fetchParticipacoes(1);
-  } catch (error) {
-    console.error("Sem Projeto.", error);
-  }
-};
 
-const fetchParticipacoes = async (idProjeto) => {
-  try {
-    const { data } = await axios.get(
-      `http://localhost:8080/participacoes/projeto/${idProjeto}`
+    const projetosComParticipacoes = await Promise.all(
+      projetosData.map(async (projeto) => {
+        let participacoesData = [];
+
+        const { data } = await axios.get(
+          `http://localhost:8080/participacoes/projeto/${projeto.id}`
+        );
+        participacoesData = data;
+
+        return {
+          ...projeto,
+          participacoes: participacoesData,
+        };
+      })
     );
-    participacoes.value = data;
+
+    projetos.value = projetosComParticipacoes;
   } catch (error) {
-    console.error("Sem Participações.", error);
+    console.error("Erro ao buscar projetos ou participações.", error);
   }
 };
 
@@ -417,10 +422,18 @@ const sendNewParticipante = async () => {
   isLoading.value = true;
   errorMessage.value = null;
   successMessage.value = null;
-
+  
   try {
-    await axios.post(`http://localhost:8080/participacoes`, formParticipacoes);
-    successMessage.value = "Participação criada com sucesso!";
+    if (isEditModeParticipacao.value) {
+      await axios.put(
+        `http://localhost:8080/participacoes/${formParticipacoes.id}`,
+        formParticipacoes
+      );
+      successMessage.value = "Particpação atualizado com sucesso!";
+    } else {
+      await axios.post(`http://localhost:8080/participacoes`, formParticipacoes);
+      successMessage.value = "Participação criada com sucesso!";
+    }
   } catch (error) {
     handleErrors(error);
   } finally {
@@ -475,13 +488,13 @@ const addNovaParticipacao = (idProjeto) => {
   formParticipacoes.projetoId = idProjeto;
 };
 
-const editarParticipacao = async (idParticipacao) => {
+const editarParticipacao = async (participacaoId) => {
   try {
-    props.showModalParticipacao = true;
+    showModalParticipacao.value = true;
     isEditModeParticipacao.value = true;
 
     const { data } = await axios.get(
-      `http://localhost:8080/participacoes/${idParticipacao}`
+      `http://localhost:8080/participacoes/${participacaoId}`
     );
 
     Object.assign(formParticipacoes, { ...data });
@@ -491,7 +504,7 @@ const editarParticipacao = async (idParticipacao) => {
     errorMessage.value =
       "Erro ao buscar o participação. Por favor, tente novamente.";
 
-    props.showModalParticipacao = false;
+    showModalParticipacao = false;
   }
 };
 

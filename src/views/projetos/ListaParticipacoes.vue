@@ -25,9 +25,10 @@
               </td>
               <td class="py-3 px-4 flex justify-center space-x-4">
                 <button
-                  @click="editarParticipacao(participacao.id)"
+                  @click="$emit('editarParticipacao', participacao.id)"
                   class="text-blue-500 hover:text-blue-700"
                   title="Atualizar"
+                  aria-label="Atualizar Participação"
                 >
                   <i class="fa fa-pencil"></i>
                 </button>
@@ -35,6 +36,7 @@
                   @click="deletarParticipacao(participacao.id)"
                   class="text-red-500 hover:text-red-700"
                   title="Deletar"
+                  aria-label="Deletar Participação"
                 >
                   <i class="fa fa-trash"></i>
                 </button>
@@ -58,12 +60,25 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import { defineProps } from "vue";
 
 defineProps({
   participacoes: {
     type: Array,
-    default: () => [],
+    required: true,
   },
 });
+
+const deletarParticipacao = async (idParticipacao) => {
+  try {
+    const { status } = await axios.delete(
+      `http://localhost:8080/participacoes/${idParticipacao}`
+    );
+    location.reload();
+    console.log(`Participação ${status} deletada com sucesso.`);
+  } catch (error) {
+    console.error("Erro ao deletar o Participação:", error);
+  }
+};
 </script>
