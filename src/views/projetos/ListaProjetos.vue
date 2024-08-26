@@ -312,17 +312,12 @@
 import { ref, reactive, onMounted } from "vue";
 import axios from "axios";
 import ListaParticipacoes from "./ListaParticipacoes.vue";
+import { isLoading, errorMessage, successMessage, isEditMode, showModal } from '../../utils/status.js'
 
-const isEditMode = ref(false);
-const showModal = ref(false);
 const projetos = ref([]);
 
 const showModalParticipacao = ref(false);
 const isEditModeParticipacao = ref(false);
-
-const isLoading = ref(false);
-const errorMessage = ref(null);
-const successMessage = ref(null);
 
 const nivelExperiencia = ["BASICO", "INTERMEDIARIO", "AVANCADO"];
 
@@ -422,7 +417,7 @@ const sendNewParticipante = async () => {
   isLoading.value = true;
   errorMessage.value = null;
   successMessage.value = null;
-  
+
   try {
     if (isEditModeParticipacao.value) {
       await axios.put(
@@ -431,7 +426,10 @@ const sendNewParticipante = async () => {
       );
       successMessage.value = "Particpação atualizado com sucesso!";
     } else {
-      await axios.post(`http://localhost:8080/participacoes`, formParticipacoes);
+      await axios.post(
+        `http://localhost:8080/participacoes`,
+        formParticipacoes
+      );
       successMessage.value = "Participação criada com sucesso!";
     }
   } catch (error) {
@@ -554,6 +552,7 @@ const closeModal = () => {
   showModal.value = false;
   isEditMode.value = false;
 };
+
 onMounted(() => {
   fetchEstudante();
 });

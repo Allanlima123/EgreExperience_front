@@ -217,12 +217,14 @@
 <script setup>
 import axios from "axios";
 import { reactive, ref, onMounted } from "vue";
+import {
+  isLoading,
+  errorMessage,
+  successMessage,
+  isEditMode,
+  showModal,
+} from "../../utils/status.js";
 
-const isLoading = ref(false);
-const showModal = ref(false);
-const isEditMode = ref(false);
-const errorMessage = ref(null);
-const successMessage = ref(null);
 const formacoesEstudante = ref([]);
 
 const formFormacao = reactive({

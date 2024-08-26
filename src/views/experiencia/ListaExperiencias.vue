@@ -203,12 +203,15 @@
 import { ref, reactive, onMounted, computed } from "vue";
 import axios from "axios";
 
-const isEditMode = ref(false);
-const showModal = ref(false);
+import {
+  isLoading,
+  errorMessage,
+  successMessage,
+  isEditMode,
+  showModal,
+} from "../../utils/status.js";
+
 const experiencias = ref([]);
-const isLoading = ref(false);
-const errorMessage = ref(null);
-const successMessage = ref(null);
 
 const formExperiencia = reactive({
   empresa: "",
