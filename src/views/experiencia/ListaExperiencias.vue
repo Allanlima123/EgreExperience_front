@@ -32,8 +32,6 @@
       </div>
     </section>
 
-    <FormExperiencia />
-
     <section class="space-y-6 px-6 max-w-screen-xl w-full">
       <div v-if="experiencias.length" class="space-y-6 max-w-screen-xl w-full">
         <div
