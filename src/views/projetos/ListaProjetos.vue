@@ -219,7 +219,14 @@
         <div
           class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full mx-4 sm:mx-auto z-10"
         >
-          <h2 class="text-xl font-semibold mb-4">Nova do Participação</h2>
+          <h2 class="text-xl font-semibold mb-4">
+            {{
+              isEditModeParticipacao
+                ? "Editar Participação"
+                : "Nova do Participação"
+            }}
+          </h2>
+
           <form @submit.prevent="sendNewParticipante" class="space-y-4">
             <div>
               <label for="nome" class="block text-sm font-medium text-gray-700">
@@ -312,7 +319,13 @@
 import { ref, reactive, onMounted } from "vue";
 import axios from "axios";
 import ListaParticipacoes from "./ListaParticipacoes.vue";
-import { isLoading, errorMessage, successMessage, isEditMode, showModal } from '../../utils/status.js'
+import {
+  isLoading,
+  errorMessage,
+  successMessage,
+  isEditMode,
+  showModal,
+} from "../../utils/status.js";
 
 const projetos = ref([]);
 
@@ -506,9 +519,7 @@ const editarParticipacao = async (participacaoId) => {
   }
 };
 
-const closeModalParticpacoes = () => {
-  showModalParticipacao.value = false;
-};
+const closeModalParticpacoes = () => (showModalParticipacao.value = false);
 
 const handleErrors = (error) => {
   if (error.response) {
