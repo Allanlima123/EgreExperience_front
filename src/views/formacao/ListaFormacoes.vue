@@ -128,11 +128,13 @@
                 <label
                   for="anoInicio"
                   class="block text-gray-700 font-medium mb-1"
-                  >Ano de Início:</label
                 >
+                  Ano de Início:
+                </label>
                 <input
                   id="anoInicio"
                   type="date"
+                  @input="(event) => formatarDateInicio(event.target.value)"
                   class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
@@ -142,11 +144,13 @@
                 <label
                   for="anoConclusao"
                   class="block text-gray-700 font-medium mb-1"
-                  >Ano de Conclusão:</label
                 >
+                  Ano de Conclusão:
+                </label>
                 <input
                   id="anoConclusao"
                   type="date"
+                  @input="(event) => formatarDateConclusao(event.target.value)"
                   class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
@@ -225,22 +229,31 @@ import {
   showModal,
 } from "../../utils/status.js";
 
+import { formatDate } from "../../utils/dateFormatter";
+
 const formacoesEstudante = ref([]);
 
 const formFormacao = reactive({
   nome: "",
   universidade: "",
   modalidade: "",
-  anoInicio: "2021/02/01",
-  anoConclusao: "2024/12/15",
+  anoInicio: "",
+  anoConclusao: "",
   ch: 0,
   estudanteId: 0,
 });
 
+const formatarDateInicio = (data) => {
+  formFormacao.anoInicio = formatDate(data);
+};
+
+const formatarDateConclusao = (data) => {
+  formFormacao.anoConclusao = formatDate(data);
+};
+
 const fetchEstudante = async () => {
   try {
     const { data } = await axios.get(`http://localhost:8080/estudante/${1}`);
-    console.log(data);
     formFormacao.estudanteId = data.id;
     fetchFormacoes();
   } catch (error) {

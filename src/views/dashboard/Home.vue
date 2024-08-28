@@ -154,7 +154,7 @@
                 Descrição Técnica Geral
               </label>
               <textarea
-                v-model="useEstudanteStore.descricaoTecnica"
+                v-model="estudanteStore.descricaoTecnica"
                 id="descricao"
                 maxlength="100"
                 rows="4"
@@ -249,7 +249,8 @@ import NavBarVertical from "@/components/NavBarVertical.vue";
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 
-import { useEstudanteStore } from "../../store/Estudante.js";
+import { useEstudanteStore } from "@/store/Estudante.js";
+import { dateFormatter } from "@/utils/dateFormatter";
 import { listaHabilidades, listaIdiomas } from "@/utils/data.js";
 
 const estudanteStore = useEstudanteStore();
@@ -296,14 +297,10 @@ const handleSubmit = async () => {
   }
 };
 
-const formatDate = (dateString) => {
-  if (!dateString) return "";
-  const [year, month, day] = dateString.split("-");
-  return `${day}/${month}/${year}`;
-};
+
 
 watch(dataObservation, (newValue) => {
-  estudanteStore.anoFormacao = formatDate(newValue);
+  estudanteStore.setAnoFormacao(dateFormatter(newValue));
 });
 
 const openFormModal = () => {

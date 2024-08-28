@@ -49,3 +49,5 @@ export const listaIdiomas = [
   "HOLANDES",
   "POLONES",
 ];
+
+export const nivelExperiencia = ["BASICO", "INTERMEDIARIO", "AVANCADO"];

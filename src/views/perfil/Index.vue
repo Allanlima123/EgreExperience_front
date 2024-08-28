@@ -14,11 +14,11 @@
                 Egressos
               </button>
             </router-link>
-            <router-link to="/perfil/editar">
+            <router-link to="/egressos/lista">
               <button
                 class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
               >
-                Editar Perfil
+                Ver lista Egressos
               </button>
             </router-link>
           </div>

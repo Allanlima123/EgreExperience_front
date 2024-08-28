@@ -59,15 +59,6 @@ const routes = [
     },
     component: () => import("../views/perfil/Index.vue"),
   },
-  {
-    path: "/perfil/editar",
-    name: "editar",
-    meta: {
-      title: "editar",
-      authRequired: false,
-    },
-    component: () => import("../views/perfil/Editar.vue"),
-  },
 
   //projeto
   {
@@ -90,15 +81,6 @@ const routes = [
     },
     component: () => import("../views/formacao/index.vue"),
   },
-  // {
-  //   path: "/formacao/estudante",
-  //   name: "participacoes",
-  //   meta: {
-  //     title: "projeto",
-  //     authRequired: false,
-  //   },
-  //   component: () => import("../views/formacao/Formacoes.vue"),
-  // },
 
   //Egressos
   {

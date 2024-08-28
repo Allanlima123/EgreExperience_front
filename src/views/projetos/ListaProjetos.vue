@@ -145,6 +145,7 @@
                   <input
                     type="date"
                     id="anoInicio"
+                    @input="(event) => formatarDateInicio(event.target.value)"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     required
                   />
@@ -160,6 +161,7 @@
                   <input
                     type="date"
                     id="anoConclusao"
+                    @input="(event) => formatarDateConclusao(event.target.value)"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     required
                   />
@@ -325,20 +327,22 @@ import {
   successMessage,
   isEditMode,
   showModal,
-} from "../../utils/status.js";
+} from "@/utils/status.js";
+
+import { nivelExperiencia } from "@/utils/data";
+
+import { formatDate } from "@/utils/dateFormatter"
 
 const projetos = ref([]);
 
 const showModalParticipacao = ref(false);
 const isEditModeParticipacao = ref(false);
 
-const nivelExperiencia = ["BASICO", "INTERMEDIARIO", "AVANCADO"];
-
 const formProjeto = reactive({
   nome: "",
   descricao: "",
-  anoInicio: "25/10/2001",
-  anoConclusao: "15/07/2014",
+  anoInicio: "",
+  anoConclusao: "",
   cidadeAtual: "",
   estudanteId: 0,
 });
@@ -349,6 +353,14 @@ const formParticipacoes = reactive({
   nivel: "",
   projetoId: 0,
 });
+
+const formatarDateInicio = (data) => {
+  formProjeto.anoInicio = formatDate(data);
+};
+
+const formatarDateConclusao = (data) => {
+  formProjeto.anoConclusao = formatDate(data);
+};
 
 const fetchEstudante = async () => {
   try {
