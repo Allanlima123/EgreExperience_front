@@ -113,6 +113,12 @@ const routes = [
     },
     component: () => import("../views/experiencia/index.vue"),
   },
+
+  //Error
+  { 
+    path: "/:pathMatch(.*)*", 
+    name: "NotFound", 
+    component: () => import("../views/notFound/NotFound") },
 ];
 
 export default routes;
