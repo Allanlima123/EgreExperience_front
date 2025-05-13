@@ -245,12 +245,12 @@
 </template>
 
 <script setup>
-import NavBarVertical from "@/components/NavBarVertical.vue";
+import NavBarVertical from "../../components/NavBarVertical.vue";
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 
 import { useEstudanteStore } from "@/store/Estudante.js";
-import { dateFormatter } from "@/utils/dateFormatter";
+import { formatDate } from "../../utils/dateFormatter";
 import { listaHabilidades, listaIdiomas } from "@/utils/data.js";
 
 const estudanteStore = useEstudanteStore();
@@ -300,7 +300,7 @@ const handleSubmit = async () => {
 
 
 watch(dataObservation, (newValue) => {
-  estudanteStore.setAnoFormacao(dateFormatter(newValue));
+  estudanteStore.setAnoFormacao(formatDate(newValue));
 });
 
 const openFormModal = () => {

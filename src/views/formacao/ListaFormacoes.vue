@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-gray-100 py-6 flex items-center flex-col min-h-screen">
+  <main class="bg-gray-100 py-4 flex items-center flex-col">
     <section
       class="flex flex-wrap items-center justify-between px-6 space-x-4 pb-6 w-full max-w-screen-xl"
     >
@@ -134,7 +134,7 @@
                 <input
                   id="anoInicio"
                   type="date"
-                  @input="(event) => formatarDateInicio(event.target.value)"
+                  v-model="formFormacao.anoInicio"
                   class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
@@ -150,7 +150,7 @@
                 <input
                   id="anoConclusao"
                   type="date"
-                  @input="(event) => formatarDateConclusao(event.target.value)"
+                  v-model="formFormacao.anoConclusao"
                   class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
@@ -229,7 +229,7 @@ import {
   showModal,
 } from "../../utils/status.js";
 
-import { formatDate } from "../../utils/dateFormatter";
+import { formatDate } from "../../utils/dateFormatter.js";
 
 const formacoesEstudante = ref([]);
 
@@ -321,8 +321,10 @@ const editarProjeto = async (idCurso) => {
     isEditMode.value = true;
 
     const { data } = await axios.get(`http://localhost:8080/curso/${idCurso}`);
+    console.log(data)
 
-    Object.assign(formFormacao, { ...data });
+    formFormacao.anoConclusao = data.anoConclusao
+    // Object.assign(formFormacao, { ...data });
   } catch (error) {
     console.error("Erro ao buscar Formação:", error);
 

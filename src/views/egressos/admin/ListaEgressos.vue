@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 py-6 flex flex-col items-center min-h-screen">
+  <div class="bg-gray-100 py-6 flex flex-col items-center">
     <section
       class="flex flex-wrap items-center justify-between px-6 space-x-4 pb-6 w-full max-w-screen-xl"
     >
@@ -25,7 +25,7 @@
       </div>
     </section>
 
-    <section class="overflow-x-auto w-full h-screen max-w-screen-xl px-6">
+    <section class="overflow-x-auto w-full max-w-screen-xl px-6">
       <table class="min-w-full">
         <thead class="bg-gray-700">
           <tr>

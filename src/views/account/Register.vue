@@ -8,7 +8,7 @@
       <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">
         Cadastro
       </h2>
-      <form @submit.prevent="sendUserPerfil">
+      <form @submit.prevent="userRegister">
         <div class="mb-4">
           <label for="nome" class="block text-gray-900">Nome:</label>
           <input
@@ -16,16 +16,6 @@
             type="text"
             id="nome"
             class="appearance-none border-b text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full px-2 py-1"
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label for="sobreNome" class="block text-gray-900">SobreNome:</label>
-          <input
-            v-model="cadastro.sobreNome"
-            type="text"
-            id="sobreNome"
-            class="appearance-none border-b text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-transparent w-full px-2 py-1"
             required
           />
         </div>
@@ -69,22 +59,47 @@ const router = useRouter();
 
 const cadastro = reactive({
   nome: "",
-  sobreNome: "",
   email: "",
   password: "",
 });
 
-const sendUserPerfil = async () => {
+const userRegister = async () => {
   try {
-    const { data } = await axios.post("http://localhost:8080/perfil", cadastro);
-    setTimeout(() =>{
-      router.push("/login")
-    }, 3000)
-    console.log(`Perfil com o ${data.id} criado com Sucesso.`);
+    const { data } = await axios.post(
+      "http://localhost:8080/usuario/register",
+      cadastro
+    );
+    console.log("Usuário registrado com sucesso:", data);
+    return data;
   } catch (error) {
-    console.error("Sem Participações.", error);
+    if (error.response) {
+      console.error("Erro na resposta:", error.response.data);
+      throw new Error(
+        error.response.data.message || "Erro ao registrar usuário."
+      );
+    } else if (error.request) {
+      console.error("Sem resposta do servidor:", error.request);
+      throw new Error("Servidor não respondeu. Tente novamente mais tarde.");
+    } else {
+      console.error("Erro ao configurar requisição:", error.message);
+      throw new Error(
+        "Erro inesperado. Verifique sua conexão ou tente novamente."
+      );
+    }
   }
 };
+
+// const sendUserPerfil = async () => {
+//   try {
+//     const { data } = await axios.post("http://localhost:8080/perfil", cadastro);
+//     setTimeout(() => {
+//       router.push("/login");
+//     }, 3000);
+//     console.log(`Perfil com o ${data.id} criado com Sucesso.`);
+//   } catch (error) {
+//     console.error("Sem Participações.", error);
+//   }
+// };
 </script>
 
 <style scoped>

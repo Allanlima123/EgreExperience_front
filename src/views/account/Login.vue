@@ -48,7 +48,7 @@
               class="shadow appearance-none border-b-2 w-full py-2 pl-0 text-white leading-tight focus:outline-none focus:shadow-outline bg-transparent"
               id="email"
               type="text"
-              v-model="dataUser.email"
+              v-model="loginUser.email"
               placeholder="Seu Email"
               required
             />
@@ -62,7 +62,7 @@
             <input
               class="shadow appearance-none border-b-2 w-full py-2 pl-0 text-white leading-tight focus:outline-none focus:shadow-outline bg-transparent"
               id="password"
-              v-model="dataUser.password"
+              v-model="loginUser.password"
               type="password"
               placeholder="Sua Senha"
               required
@@ -94,10 +94,31 @@ import axios from 'axios';
 import { reactive } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 
-const dataUser = reactive({
+const loginUser = reactive({
   email: "",
   password: ""
 })
+
+const login = async () => {
+  try {
+    const response = await axios.post('http://localhost:8080/usuario/login', loginUser);
+
+    const token = response.data.token; // depende de como o backend retorna
+    console.log('Login bem-sucedido! Token:', token);
+
+    // Salvar token no localStorage (opcional)
+    localStorage.setItem('token', token);
+
+    return token;
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      console.error('Email ou senha incorretos.');
+    } else {
+      console.error('Erro ao fazer login:', error.message);
+    }
+    return null;
+  }
+};
 
 
 </script>

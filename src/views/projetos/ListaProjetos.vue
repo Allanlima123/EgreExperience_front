@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-gray-100 py-6 flex items-center flex-col min-h-screen">
+  <main class="bg-gray-100 py-4 flex items-center flex-col">
     <section
       class="flex flex-wrap items-center justify-between px-6 space-x-4 pb-6 w-full max-w-screen-xl"
     >
@@ -331,7 +331,7 @@ import {
 
 import { nivelExperiencia } from "@/utils/data";
 
-import { formatDate } from "@/utils/dateFormatter"
+import { formatDate } from "../../utils/dateFormatter"
 
 const projetos = ref([]);
 

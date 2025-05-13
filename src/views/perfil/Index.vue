@@ -1,9 +1,8 @@
 <template>
-  <div class="min-h-screen h-screen flex flex-col bg-gray-300">
-    <NavBar />
-    <main class="flex-grow p-4 overflow-auto flex justify-center">
-      <section class="flex h-full flex-col max-w-screen-xl w-full">
-        <div class="flex items-center justify-between px-4 space-x-3 pb-4">
+  <div class=" flex flex-col">
+    <section class="bg-gray-100 py-4 flex items-center flex-col ">
+      <div class="flex flex-col max-w-screen-xl w-full">
+        <div class="flex items-center justify-between px-4 space-x-3 pb-4 ">
           <h1 class="text-gray-800 font-bold mb-4 text-4xl">Perfil</h1>
 
           <div class="space-x-3">
@@ -24,7 +23,7 @@
           </div>
         </div>
 
-        <div class="flex overflow-hidden">
+        <div class="flex h-[25rem]">
           <div class="p-4 rounded-md mr-4">
             <div class="w-56 h-56 flex items-center justify-center mb-3">
               <img
@@ -93,6 +92,7 @@
                 >
               </router-link>
             </div>
+            
             <div class="section-divider"></div>
 
             <div>
@@ -161,15 +161,12 @@
             <div class="section-divider"></div>
           </div>
         </div>
-      </section>
-    </main>
-    <Footer />
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup>
-import NavBar from "../perfil/Navbar.vue";
-import Footer from "../perfil/Footer.vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";

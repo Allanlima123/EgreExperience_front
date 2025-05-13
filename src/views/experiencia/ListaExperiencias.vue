@@ -1,9 +1,9 @@
 <template>
-  <main class="bg-gray-100 py-8 flex items-center flex-col min-h-screen">
+  <main class="bg-gray-100 py-4 flex items-center flex-col">
     <section
       class="flex flex-col md:flex-row items-center justify-between px-6 space-y-4 md:space-y-0 pb-6 w-full max-w-screen-xl"
     >
-      <h1 class="text-gray-800 font-bold text-4xl">Experiência</h1>
+      <h1 class="text-gray-800 font-bold text-4xl">Experiências</h1>
       <div class="flex items-center space-x-4">
         <div class="relative w-full md:w-auto">
           <i

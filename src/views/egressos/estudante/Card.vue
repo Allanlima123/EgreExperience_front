@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-gray-100 py-6 flex items-center flex-col min-h-screen">
+  <main class="bg-gray-100 py-4 flex items-center flex-col">
     <section
       class="flex flex-wrap items-center justify-between px-4 space-x-3 pb-4 w-full max-w-screen-xl"
     >

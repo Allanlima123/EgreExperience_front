@@ -1,6 +1,6 @@
 <template>
   <aside>
-    <transition name="slide">
+    <transition-group name="slide">
       <nav
         :class="{ 'w-16': isCollapsed, 'w-56': !isCollapsed }"
         class="bg-gray-800 h-screen rounded-r-md transition-width duration-800"
@@ -22,18 +22,21 @@
               </div>
             </div>
             <div class="flex-grow">
-              <div
-                class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
-              >
-                <i class="fa fa-university text-white text-xl"></i>
-                <transition name="text">
-                  <span
-                    v-if="!isCollapsed"
-                    class="ml-2 text-white transition-width"
-                    >Home</span
-                  >
-                </transition>
-              </div>
+              <router-link to="/">
+                <div
+                  class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
+                >
+                  <i class="fa fa-university text-white text-xl"></i>
+                  <transition name="text">
+                    <span
+                      v-if="!isCollapsed"
+                      class="ml-2 text-white transition-width"
+                      >Home</span
+                    >
+                  </transition>
+                </div>
+              </router-link>
+
               <router-link to="/formacao">
                 <div
                   class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
@@ -43,13 +46,13 @@
                     <span
                       v-if="!isCollapsed"
                       class="ml-2 text-white transition-opacity duration-500 ease-linear"
-                      >Formação</span
+                      >Cursos</span
                     >
                   </transition>
                 </div>
               </router-link>
 
-              <router-link to="/experiencia">
+              <router-link to="/experiencias">
                 <div
                   class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
                 >
@@ -58,7 +61,7 @@
                     <span
                       v-if="!isCollapsed"
                       class="ml-2 text-white transition-opacity duration-500 ease-linear"
-                      >Experiência</span
+                      >Experiências</span
                     >
                   </transition>
                 </div>
@@ -95,7 +98,9 @@
               </router-link>
             </div>
             <div>
-              <router-link :to="{ name: 'perfil', params: { username, id: userId } }">
+              <router-link
+                :to="{ name: 'perfil', params: { username, id: userId } }"
+              >
                 <div
                   class="flex items-center p-4 hover:bg-gray-700 cursor-pointer"
                 >
@@ -129,7 +134,7 @@
           </div>
         </div>
       </nav>
-    </transition>
+    </transition-group>
   </aside>
 </template>
 
@@ -139,10 +144,10 @@ import { useEstudanteStore } from "../store/Estudante.js";
 
 const isCollapsed = ref(false);
 
-const estudante = useEstudanteStore()
+const estudante = useEstudanteStore();
 
-const username = "alan"; 
-const userId =  1;
+const username = "alan";
+const userId = 1;
 
 // const username = localStorage.getItem("username") || [];
 
